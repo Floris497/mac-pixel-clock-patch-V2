@@ -34,7 +34,8 @@ IOKit is not a kernel extension and therefore must be codesigned to run, this is
 
 2: run ```chmod +x XXXX-patcher.command``` (this makes it runable)
 
-3: run the script ```~/Downloads/patcher.script``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
+3: run the script ```~/Downloads/XXXX-patcher.command``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
 
+If you wan't to request new functions for this script feel free to open an issue.
 
 
