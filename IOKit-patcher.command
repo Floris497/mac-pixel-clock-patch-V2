@@ -57,12 +57,13 @@ IOKitPatched=(
 oToolIOKitUnpatched=(
   29c6568524738576b2ec6e11cfdaa88c '10.10.5' 5
   a224cbca101477adc660f69ce5bbe3ba '10.11.1 beta' 6
-  
+  35d16b0cd84364267497ef73c144c0d8 '10.11' 6
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
 oToolIOKitPatched=(
   097a9a5527f0882b6400432c138481bf '10.10.5'  
+  e51fd1376c9c32e5b186062a132a4f20 '10.11'
 )
 
 function makeExit {
@@ -83,6 +84,7 @@ function SIPInfo {
 }
 
 function help {
+  printf "using this script without input will patch IOKit if supported version found\n"
   printf "patch [v1-v6]\t patch on a specific version\n"
   printf "\t\t $(basename $thiscommand) patch v3\n"
   printf "unpatch\t\t undo patch\n"
@@ -211,7 +213,7 @@ function test {
       printf "Detected patched IOKit on OS X %s.\n" "${IOKitPatched[$i+1]}"
     fi
   done
-  for ((i=0; i < ${#oToolIOKitPatched[@]}; i+=3)); do
+  for ((i=0; i < ${#oToolIOKitPatched[@]}; i+=2)); do
     if [[ $oToolIOKitCurrent == ${oToolIOKitPatched[$i]} ]]; then
       printf "(otool) Detected patched IOKit on OS X %s.\n" "${oToolIOKitPatched[$i+1]}"
     fi
@@ -259,12 +261,14 @@ function options {
   elif [[ $1 == 'help' ]]; then
     help
     exit
+  elif [[ -z $1 ]]; then
+    test "patch"
+    exit
   else
     printf "option is not valid\n"
-    printf "\nsome information on the IOKit files you have\n"
-    test
     printf "\n"
 	  help
+    exit
   fi
 }
 
