@@ -87,7 +87,7 @@ function SIPInfo {
 function help {
   printf "using this script without input will patch IOKit if supported version found\n"
   printf "patch [v1-v6]\t patch on a specific version\n"
-  printf "\t\t $(basename $thiscommand) patch v3\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v3\n"
   printf "unpatch\t\t undo patch\n"
   printf "test\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
@@ -104,16 +104,16 @@ function testSIP {
       askExit
     elif [[ "$(csrutil status | head -n 1)" == *"status: enabled"* ]]; then
       printf "SIP is enabled, this script will only work if SIP is disabled\n"
-      SIPInfo
       makeExit
     elif [[ "$(csrutil status | head -n 1)" == *"status: disabled"* ]]; then
       printf "SIP looks to be disabled, all good!\n"
-      SIPInfo
     fi
   fi  
 }
 
 function IOKitPatch {
+  testSIP
+  
   case "$1" in
   1)  printf "Patching IOKit with patch version 1\n"
       sudo perl -i.bak -pe '$before = qr"\xF6\xC1\x01\x74\x0A"s;s/$before/\xE9\x71\x03\x00\x00/g' $IOKitLocation
@@ -152,7 +152,13 @@ function IOKitPatch {
 }
 
 function IOKitUnpatch {
-  sudo mv $IOKitLocation.bak $IOKitLocation
+  testSIP
+  
+  if [[ -f "$IOKitLocation.bak" ]]; then
+    sudo mv $IOKitLocation.bak $IOKitLocation
+  else 
+    printf "No backup found, the patch has either not been done, or the backup file has been deleted.."
+  fi
 }
 
 function IOKitPrintAllMD5 {
@@ -187,6 +193,8 @@ function testIOKitPatch {
 }
 
 function test {
+  testSIP
+  printf "\n"
   for ((i=0; i < ${#IOKitUnpatched[@]}; i+=3)); do
     if [[ $IOKitCurrent == ${IOKitUnpatched[$i]} ]]; then
       printf "Detected unpatched IOKit on OS X %s.\n" "${IOKitUnpatched[$i+1]}"
@@ -273,4 +281,5 @@ function options {
   fi
 }
 
+# runs the script
 options $1 $2
