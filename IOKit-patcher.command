@@ -196,9 +196,11 @@ function testIOKitPatch {
 function test {
   testSIP
   printf "\n"
+  nothingWasFound=true;
   for ((i=0; i < ${#IOKitUnpatched[@]}; i+=3)); do
     if [[ $IOKitCurrent == ${IOKitUnpatched[$i]} ]]; then
       printf "Detected unpatched IOKit on OS X %s.\n" "${IOKitUnpatched[$i+1]}"
+      nothingWasFound=false
       if [[ ! -z $1 ]]; then
         if [[ $1 == "patch" ]]; then
           IOKitPatch ${IOKitUnpatched[$i+2]}
@@ -210,6 +212,7 @@ function test {
   for ((i=0; i < ${#oToolIOKitUnpatched[@]}; i+=3)); do
     if [[ $oToolIOKitCurrent == ${oToolIOKitUnpatched[$i]} ]]; then
       printf "(otool) Detected unpatched IOKit on OS X %s.\n" "${oToolIOKitUnpatched[$i+1]}"
+      nothingWasFound=false
       if [[ ! -z $1 ]]; then
         if [[ $1 == "patch" ]]; then
           IOKitPatch ${oToolIOKitUnpatched[$i+2]} 
@@ -221,13 +224,19 @@ function test {
   for ((i=0; i < ${#IOKitPatched[@]}; i+=2)); do
     if [[ $IOKitCurrent == ${IOKitPatched[$i]} ]]; then
       printf "Detected patched IOKit on OS X %s.\n" "${IOKitPatched[$i+1]}"
+      nothingWasFound=false
     fi
   done
   for ((i=0; i < ${#oToolIOKitPatched[@]}; i+=2)); do
     if [[ $oToolIOKitCurrent == ${oToolIOKitPatched[$i]} ]]; then
       printf "(otool) Detected patched IOKit on OS X %s.\n" "${oToolIOKitPatched[$i+1]}"
+      nothingWasFound=false
     fi
   done
+  if $nothingWasFound; then
+    echo "Unknown version of IOKit found.."
+    IOKitPrintAllMD5
+  fi
 }
 
 
