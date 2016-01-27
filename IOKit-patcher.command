@@ -89,7 +89,7 @@ function help {
   printf "patch [v1-v6]\t patch on a specific version\n"
   printf "\t\t eg. $(basename $thiscommand) patch v3\n"
   printf "unpatch\t\t undo patch\n"
-  printf "test\t\t Shows you if you have an known or unknown patch\n"
+  printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
   printf "help\t\t show this help message\n"
 }
@@ -261,7 +261,7 @@ function options {
       makeExit
     fi
     IOKitUnpatch
-  elif [[ $1 == 'test' ]]; then
+  elif [[ $1 == 'test' ]] || [[ $1 == 'status' ]]; then
     test
     exit
   elif [[ $1 == 'md5' ]]; then
