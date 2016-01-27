@@ -130,19 +130,19 @@ function IOKitPatch {
   4)  printf "Patching IOKit with patch version 4\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x9D\x03\x00\x00"s;s/$before/\xE9\x84\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing IOKit\n"
+      printf "Re-singing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
   5)  printf "Patching IOKit with patch version 5\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x9E\x03\x00\x00"s;s/$before/\xE9\x83\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing IOKit\n"
+      printf "Re-singing $IOKitLocation\n"
     	sudo codesign -f -s - $IOKitLocation
       ;;
   6)  printf "Patching IOKit with patch version 6\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x92\x03\x00\x00"s;s/$before/\xE9\x7A\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing IOKit\n"
+      printf "Re-singing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
@@ -155,6 +155,7 @@ function IOKitUnpatch {
   testSIP
   
   if [[ -f "$IOKitLocation.bak" ]]; then
+    printf "Moving backup file back in place"
     sudo mv $IOKitLocation.bak $IOKitLocation
   else 
     printf "No backup found, the patch has either not been done, or the backup file has been deleted.."
