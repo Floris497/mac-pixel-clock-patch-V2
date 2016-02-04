@@ -1,25 +1,37 @@
-# mac-pixel-clock-patch-V2 ALPHA
+# mac-pixel-clock-patch-V2 BETA
 
-Based on [version 1](https://github.com/floris497/mac-pixel-clock-patch). [original](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
-
-for more info look at the old patch: https://github.com/floris497/mac-pixel-clock-patch
+Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
 
-#### this patch is still in development, as far as i know it's pretty stable, but fairly untested. If you see big or little mistakes in this patch please let me know by either making an issue or fork this patch and make it even better.
+# What does this patch resolve?
 
-#### for now only IOKit. (AMD and Nvidia will get their own similar patch file later)
+* makes 4K/3840x2160/UHD/2560x1080/3440x1440 resolutions possible on older macs over both HDMI and DisplayPort. (other odd/high resolutions should also work)
+* Enables HDMI2.0 on Nvidia Maxwell cards (Never tested this myself, for this you only need the IOKit patch not the Nvidia patch)
 
-For this patch to work on as many systems as possible i need to gather MD5 hashes of the IOKit files, if your version of IOKit is not yet supported run ```XXXX-patcher.command md5``` and make a new issue to give me the md5's i need to improve the reach of this patch.
+# A few things to keep in mind
 
-If you feel adventurous and the patch for your IOKit is not yet available yet, you can use ```XXXX-patcher.command patch <vX>``` [```<vX>``` must be replaced with something like v6 which is currently the latest version] this way you can try and patch with an older patch. this will work often, the script will notify you if it was successful or not. if this works please run ```XXXX-patcher.command md5``` and notify me of your MD5's.
+* Disable SIP (more info below)
+* For Nvidia SIP needs to stay disabled for IOKit it can be enabled again after patching
+* Nvidia patch needs IOKit patch to be effective (maybe not always)
+* If using an adapter make sure this is not the problem.
+* For different issue's first look trough open and closed issues on this repository and the original repository or open a new one.
+* This list will get longer when i have time to gather all the regular issues.
 
-If your version is available but it does not detect it is patched the script probably does not contain an identification MD5 for your version of IOKit yet, if you run ```XXXX-patcher.command md5``` and provide me the MD5's, I can add those too.
+This patch needs MD5's to identify IOKit and Nvidia driver files, if your version is not yet added to the script you can run "XXXX-patcher.command md5" and post them in a new issue, this way i can add them.
 
-how to use
-=====
+If you have a new version of IOKit or Nvidia driver that is not yet supported you can run the command and choose the patch version yourself. for Nvidia there are now 2 versions, so most likely you need v2 for IOKit there are 6 versions so for new IOKit's you most likely need v6. use the command like ```XXXX-patcher.command patch v6``` Most of the time this will work, but use this function carefully.
 
-#####MAKE SURE TO DISABLE SIP on OS X 10.11 and newer.
+How to use
+=
+
+1. Download the patch you need
+2. run ```chmod +x XXXX-patcher.command``` (this makes it runable)
+3. run the script ```~/Downloads/XXXX-patcher.command``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
+
+If you wan't to request new functions for this script feel free to open an issue with the request.
+
+##### Some information on SIP
 
 First make sure SIP (System Integrity Protection) is turned off for this to work.
 You can disable/enable this only when you boot into the recovery partition.
@@ -29,13 +41,3 @@ the changes to SIP are only visible in the terminal after a reboot, so it will s
 SIP can safely be enabled after the patch of the IOKit, if you also want to use an Nvidia/AMD driver that has been patched you need to keep SIP disabled. this is because SIP will not allow you to run drivers which have a broken or no codesignature. by patching the driver we obviously break the codesignature.
 kernal extensions are not signable by anyone but apple and trusted parties. so SIP needs to be off for them to load.
 IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificat, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit. 
-
-1: Download the patch you need
-
-2: run ```chmod +x XXXX-patcher.command``` (this makes it runable)
-
-3: run the script ```~/Downloads/XXXX-patcher.command``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
-
-If you wan't to request new functions for this script feel free to open an issue.
-
-
