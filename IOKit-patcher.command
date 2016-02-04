@@ -246,28 +246,27 @@ function options {
     if [[ -f "$IOKitLocation.bak" ]]; then
       printf "An backup file already exists, if you force this patch on an already patched version you will loose the original backup!\n"
       printf "This will lead you to reinstall the OS if you loose a working version of IOKit. be carefull\n"
-      printf "It might be wise to undo the patch before trying to redo it. using: $thiscommand unpatch\n"
+      printf "It might be wise to undo the patch before trying to redo it using: $thiscommand unpatch\n"
       askExit
-    else
-      if [[ -z $2 ]]; then
-        printf "Did not specify patch version\n"
-        makeExit
-      fi
-      case "$2" in
-        v1) IOKitPatch 1;;
-        v2) IOKitPatch 2;;
-        v3) IOKitPatch 3;;
-        v4) IOKitPatch 4;;
-        v5) IOKitPatch 5;;
-        v6) IOKitPatch 6;;
-        *)  IOKitPatch 0;;
-      esac
-      testIOKitPatch
-    fi 
+    fi
+    if [[ -z $2 ]]; then
+      printf "Did not specify patch version\n"
+      makeExit
+    fi
+    case "$2" in
+      v1) IOKitPatch 1;;
+      v2) IOKitPatch 2;;
+      v3) IOKitPatch 3;;
+      v4) IOKitPatch 4;;
+      v5) IOKitPatch 5;;
+      v6) IOKitPatch 6;;
+      *)  IOKitPatch 0;;
+    esac
+    testIOKitPatch 
     exit 
   elif [[ $1 == 'unpatch' ]]; then
     if [[ ! -f "$IOKitLocation.bak" ]]; then
-      printf "There is no backup file, we can not undo the patch. the patch might not even been done\n"
+      printf "There is no backup file, we can not undo the patch. the patch might not even been done.\n"
       makeExit
     fi
     IOKitUnpatch
