@@ -39,6 +39,7 @@ IOKitUnpatched=(
   # a7afb2dd9df1e4c48f12b4b52f7da212 '10.11.2' 6
   # 3cec8ae287ee52a3622082bfc049bb86 '10.11.3' 6
   af00c155d23f24d5058f06bdfedf1066 '10.11.4 BETA: 15E27e' 6
+  3880cd8ab5a59da851186668db54b8cb '10.11.4 BETA: 15E33e' 6
 )
 
 # md5 checksums of patched IOKit files
