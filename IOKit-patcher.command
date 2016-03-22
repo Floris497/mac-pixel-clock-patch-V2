@@ -30,16 +30,9 @@ IOKitUnpatched=(
   2a8cbc2f6616d3f7a5e499bd2d5593ab '10.10.0' 5
   a94dc8e1b6bb6491e5f610f0a3caf960 '10.10.2' 5
   29d7632362b2fa4993156717671a5642 '10.10.3 - 10.10.5' 5
-  2e32fac0525c7d93ddd38f1202515d99 '10.11 BETA 1' 6
-  516bea2790cd6bfcb41959aa66122623 '10.11 BETA 2' 6
-  15f9046ff25c807b7c76db8cdaf6ae4c '10.11 BETA 3' 6
-  798a8e362e89e38e8f9cf6e59fda5184 '10.11 BETA 5' 6
-  fd1d5161af223a95452ee90f294eb8ba '10.11 BETA 6' 6
   7359b413a4dca7a189b80da750ce43dd '10.11.1' 6
   # a7afb2dd9df1e4c48f12b4b52f7da212 '10.11.2' 6
   # 3cec8ae287ee52a3622082bfc049bb86 '10.11.3' 6
-  af00c155d23f24d5058f06bdfedf1066 '10.11.4 BETA: 15E27e' 6
-  3880cd8ab5a59da851186668db54b8cb '10.11.4 BETA: 15E33e' 6
 )
 
 # md5 checksums of patched IOKit files
@@ -59,7 +52,7 @@ oToolIOKitUnpatched=(
   29c6568524738576b2ec6e11cfdaa88c '10.10.5' 5
   a224cbca101477adc660f69ce5bbe3ba '10.11.1 beta' 6
   e70f3a302a6f87190e6d6fe7609cb4b5 '10.11.2 and 10.11.3' 6
-  9522ce35bbc6d1e629e0a7a47a359ee0 '10.11.4 BETA: 15E33e' 6
+  769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -67,7 +60,7 @@ oToolIOKitPatched=(
   097a9a5527f0882b6400432c138481bf '10.10.5'  
   e51fd1376c9c32e5b186062a132a4f20 '10.11'
   422c441e207a011b355f712fc0ff7fba '10.11.2 and 10.11.3'
-  dcd8ab57d06fc8c0719828ec0f15e132 '10.11.4 BETA: 15E33e' 6
+  637f064f5d76492f7ac5479e6554caa6 '10.11.4'
 )
 
 function makeExit {
