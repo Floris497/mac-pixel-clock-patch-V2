@@ -25,6 +25,7 @@ NVDAMD5Unpatched=(
   1ecb016bc5b4ed7b7949d87e4f3f234a '10.11.1' 2
   bb87a13eaabefcafa9e82fad03365aa4 '10.11.2' 2
   4c5aa903f28e3dbcfb2e15d8efdbfcbe '10.11.3' 2
+  840234288d56c2171e75083dfdd6b1d9 '10.11.4' 2
 )
 
 # md5 checksums of patched Nvidia files
@@ -38,6 +39,7 @@ NVDAMD5Patched=(
   b6babc8ca4f03bdb2552bb01c51770b1 '10.11.1'
   3b3244d597be457326d9c19309f00ff0 '10.11.2'
   0530c11c65068c0201505a914f6f0bf6 '10.11.3'
+  fa463e9b414b02538e12044c365636a3 '10.11.4'
 )
 
 function makeExit {

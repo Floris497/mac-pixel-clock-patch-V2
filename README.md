@@ -1,4 +1,4 @@
-# mac-pixel-clock-patch-V2 BETA
+# mac-pixel-clock-patch-V2
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
