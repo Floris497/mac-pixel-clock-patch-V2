@@ -53,6 +53,7 @@ oToolIOKitUnpatched=(
   a224cbca101477adc660f69ce5bbe3ba '10.11.1 beta' 6
   e70f3a302a6f87190e6d6fe7609cb4b5 '10.11.2 and 10.11.3' 6
   769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
+  d8829f2234464985863c7a501c288547 '10.11.5' 6
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -61,6 +62,7 @@ oToolIOKitPatched=(
   e51fd1376c9c32e5b186062a132a4f20 '10.11'
   422c441e207a011b355f712fc0ff7fba '10.11.2 and 10.11.3'
   637f064f5d76492f7ac5479e6554caa6 '10.11.4'
+  5ff1819545b8e127728a904c8f41bc5f '10.11.5'
 )
 
 function makeExit {
