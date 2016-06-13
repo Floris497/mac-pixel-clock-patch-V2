@@ -54,6 +54,8 @@ oToolIOKitUnpatched=(
   e70f3a302a6f87190e6d6fe7609cb4b5 '10.11.2 and 10.11.3' 6
   769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
   d8829f2234464985863c7a501c288547 '10.11.5' 6
+  508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
+  eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -63,6 +65,8 @@ oToolIOKitPatched=(
   422c441e207a011b355f712fc0ff7fba '10.11.2 and 10.11.3'
   637f064f5d76492f7ac5479e6554caa6 '10.11.4'
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
+  75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
+  7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
 )
 
 function makeExit {
@@ -85,7 +89,7 @@ function SIPInfo {
 function help {
   printf "using this script without input will patch IOKit if supported version found\n"
   printf "patch [v1-v6]\t patch on a specific version\n"
-  printf "\t\t eg. $(basename $thiscommand) patch v3\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v6\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
@@ -139,6 +143,12 @@ function IOKitPatch {
       ;;
   6)  printf "Patching IOKit with patch version 6\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x92\x03\x00\x00"s;s/$before/\xE9\x7A\x03\x00\x00\x90/g' $IOKitLocation
+      sudo touch /System/Library/Extensions
+      printf "Re-singing $IOKitLocation\n"
+      sudo codesign -f -s - $IOKitLocation
+      ;;
+  7)  printf "Patching IOKit with patch version 7\n"
+      sudo perl -i.bak -pe '$before = qr"\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\xF6\xC1\x01\xE9\x06\x04\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
       printf "Re-singing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
@@ -258,6 +268,7 @@ function options {
       v4) IOKitPatch 4;;
       v5) IOKitPatch 5;;
       v6) IOKitPatch 6;;
+      v7) IOKitPatch 7;;
       *)  IOKitPatch 0;;
     esac
     testIOKitPatch 

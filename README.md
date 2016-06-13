@@ -2,7 +2,12 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## 10.11.5 now supported by script
+## 10.11.5 now supported by script (and 10.11.6 beta) (and maybe 10.12 16A201w) 
+
+## Expirimental for 10.12 16A201w (I had no proper setup to test it, if you are ambiguous please let me know if it works!)
+### This version has a new patch v7. I have at the moment no working 4k display..
+### Please try and use the 4k screen without the patch first, to see if it makes a difference.
+
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
 
