@@ -163,7 +163,7 @@ function IOKitUnpatch {
   testSIP
   
   if [[ -f "$IOKitLocation.bak" ]]; then
-    printf "Moving backup file back in place"
+    printf "Moving backup file back in place\n"
     sudo mv $IOKitLocation.bak $IOKitLocation
   else 
     printf "No backup found, the patch has either not been done, or the backup file has been deleted.."

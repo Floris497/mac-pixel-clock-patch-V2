@@ -111,7 +111,7 @@ function NVDAUnpatch {
   testSIP
 
   if [[ -f "$NVDALocation.bak" ]]; then
-    printf "Moving backup file back in place"
+    printf "Moving backup file back in place\n"
     sudo mv $NVDALocation.bak $NVDALocation
   else
     printf "No backup found, the patch has either not been done, or the backup file has been deleted.."

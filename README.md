@@ -4,7 +4,7 @@ Based on [my fork of the repository](https://github.com/floris497/mac-pixel-cloc
 
 ## 10.11.5 now supported by script (and 10.11.6 beta) (and maybe 10.12 16A201w) 
 
-## Expirimental for 10.12 16A201w (I had no proper setup to test it, if you are ambiguous please let me know if it works!)
+## Experimental for 10.12 16A201w (I had no proper setup to test it, if you feel adventurous please let me know if it works!)
 ### This version has a new patch v7. I have at the moment no working 4k display..
 ### Please try and use the 4k screen without the patch first, to see if it makes a difference.
 
@@ -33,7 +33,7 @@ How to use
 =
 
 1. Download the patch you need
-2. run ```chmod +x XXXX-patcher.command``` (this makes it runable)
+2. run ```chmod +x XXXX-patcher.command``` (this makes it runnable)
 3. run the script ```~/Downloads/XXXX-patcher.command``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
 
 If you wan't to request new functions for this script feel free to open an issue with the request.
@@ -46,5 +46,5 @@ If you booted into the recovery partition and open the terminal you use ```csrut
 the changes to SIP are only visible in the terminal after a reboot, so it will still notify you that SIP is on when you disable it and run ```csrutil status``` right after it.
 
 SIP can safely be enabled after the patch of the IOKit, if you also want to use an Nvidia/AMD driver that has been patched you need to keep SIP disabled. this is because SIP will not allow you to run drivers which have a broken or no codesignature. by patching the driver we obviously break the codesignature.
-kernal extensions are not signable by anyone but apple and trusted parties. so SIP needs to be off for them to load.
+kernel extensions are not signable by anyone but apple and trusted parties. so SIP needs to be off for them to load.
 IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificat, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit. 
