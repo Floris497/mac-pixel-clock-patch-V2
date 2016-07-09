@@ -27,6 +27,7 @@ NVDAMD5Unpatched=(
   4c5aa903f28e3dbcfb2e15d8efdbfcbe '10.11.3' 2
   840234288d56c2171e75083dfdd6b1d9 '10.11.4' 2
   62e429ce9f61893a5b7379b0b0b9839f '10.11.5' 2
+  3fa41c5c3c1074a1e535ac97f60758de '10.11.5 14F1808' 2
 )
 
 # md5 checksums of patched Nvidia files
