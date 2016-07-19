@@ -2,8 +2,22 @@
 
 thiscommand=$0
 
+# gain os version
+gProductVer="$(sw_vers -productVersion)"
+gOSVer=${gProductVer:0:5}
+
+# set delimitation os ver
+let gDelimitation_OSVer=12
+
 # change for debug purposes
-IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+# detect framework location by syscl/lighting/Yating Zhou
+if [ $gOSVer -ge $gDelimitation_OSVer ]; then
+    # 10.12+
+    IOKitLocation="/System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay"
+else
+    # 10.12-
+    IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+fi
 
 # for development
 # IOKitLocation="/Users/user/Desktop/IOKit"
@@ -56,6 +70,7 @@ oToolIOKitUnpatched=(
   d8829f2234464985863c7a501c288547 '10.11.5' 6
   508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
+  08e40fa3beaee9c65b6cfe76005fc00b '10.12 16A238m' 8
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -67,6 +82,7 @@ oToolIOKitPatched=(
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
+  7ac457ffff9d9a2d745a4b72c7f63f65 '10.12 16A238m'
 )
 
 function makeExit {
@@ -153,6 +169,12 @@ function IOKitPatch {
       printf "Re-singing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
+  8)  printf "Patching IOKit with patch version 8\n"
+      sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85"s;s/$before/\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9/g' $IOKitLocation
+      sudo touch /System/Library/Extensions
+      printf "Re-singing $IOKitLocation\n"
+      sudo codesign -f -s - $IOKitLocation
+;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
       exit
       ;;
