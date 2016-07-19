@@ -70,7 +70,7 @@ oToolIOKitUnpatched=(
   d8829f2234464985863c7a501c288547 '10.11.5' 6
   508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
-  08e40fa3beaee9c65b6cfe76005fc00b '10.12 16A238m' 8
+  9a410aa0b8a5b4156469baf03f16d6cb '10.12 16A238m' 8
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -82,7 +82,7 @@ oToolIOKitPatched=(
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
-  7ac457ffff9d9a2d745a4b72c7f63f65 '10.12 16A238m'
+  9be148d87b4c02e0bf0719426f052e22 '10.12 16A238m'
 )
 
 function makeExit {
