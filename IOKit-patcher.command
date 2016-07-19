@@ -14,7 +14,7 @@ let gDelimitation_OSVer=12
 if [ $gOSVer -ge $gDelimitation_OSVer ]; then
     # 10.12+
     IOKitLocation="/System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay"
-    else
+else
     # 10.12-
     IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
 fi
@@ -82,7 +82,7 @@ oToolIOKitPatched=(
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
-  7ac457ffff9d9a2d745a4b72c7f63f65 '10.12 16A238m' 8
+  7ac457ffff9d9a2d745a4b72c7f63f65 '10.12 16A238m'
 )
 
 function makeExit {
