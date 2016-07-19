@@ -4,7 +4,7 @@ thiscommand=$0
 
 # gain os version
 gProductVer="$(sw_vers -productVersion)"
-gOSVer=${gProductVer:0:5}
+gOSVer=${gProductVer:3:2}
 
 # set delimitation os ver
 let gDelimitation_OSVer=12
@@ -69,7 +69,9 @@ oToolIOKitUnpatched=(
   769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
   d8829f2234464985863c7a501c288547 '10.11.5' 6
   508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
-  eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
+# Note: The following checksum is the unpatched CoreDisplay instead of IOKit in Sierra
+# we place here for minimal modification
+  4e230b6586278b679034065be2cd36f0 '10.12 16A201w' 8
   9a410aa0b8a5b4156469baf03f16d6cb '10.12 16A238m' 8
 )
 
@@ -81,7 +83,9 @@ oToolIOKitPatched=(
   637f064f5d76492f7ac5479e6554caa6 '10.11.4'
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
-  7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
+# Note: The following checksum is the patched CoreDisplay instead of IOKit in Sierra
+# we place here for minimal modification
+  4e230b6586278b679034065be2cd36f0 '10.12 16A201w'
   9be148d87b4c02e0bf0719426f052e22 '10.12 16A238m'
 )
 
