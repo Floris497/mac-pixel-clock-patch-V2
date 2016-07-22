@@ -27,6 +27,7 @@ NVDAMD5Unpatched=(
   4c5aa903f28e3dbcfb2e15d8efdbfcbe '10.11.3' 2
   840234288d56c2171e75083dfdd6b1d9 '10.11.4' 2
   62e429ce9f61893a5b7379b0b0b9839f '10.11.5' 2
+  3fa41c5c3c1074a1e535ac97f60758de '10.11.5 14F1808' 2
 )
 
 # md5 checksums of patched Nvidia files
@@ -42,6 +43,7 @@ NVDAMD5Patched=(
   0530c11c65068c0201505a914f6f0bf6 '10.11.3'
   fa463e9b414b02538e12044c365636a3 '10.11.4'
   bba91da3d3208e36c24c7a64562c6eed '10.11.5'
+  f806a5fc95cc382390cb02058abdf852 '10.11.5 14F1808'
 )
 
 function makeExit {
@@ -111,7 +113,7 @@ function NVDAUnpatch {
   testSIP
 
   if [[ -f "$NVDALocation.bak" ]]; then
-    printf "Moving backup file back in place"
+    printf "Moving backup file back in place\n"
     sudo mv $NVDALocation.bak $NVDALocation
   else
     printf "No backup found, the patch has either not been done, or the backup file has been deleted.."
