@@ -69,11 +69,12 @@ oToolIOKitUnpatched=(
   769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
   d8829f2234464985863c7a501c288547 '10.11.5' 6
   508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
+  d8829f2234464985863c7a501c288547 '10.11.6' 8
 # Note: The following checksum is the unpatched CoreDisplay instead of IOKit in Sierra
 # we place here for minimal modification
   4e230b6586278b679034065be2cd36f0 '10.12 16A201w' 8
   9a410aa0b8a5b4156469baf03f16d6cb '10.12 16A238m' 8
-  49cd8062ed1c8f610b71e9a3231cf804 '10.12 16A239j' 8
+  49cd8062ed1c8f610b71e9a3231cf804 '10.12 16A254g' 8
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -84,11 +85,12 @@ oToolIOKitPatched=(
   637f064f5d76492f7ac5479e6554caa6 '10.11.4'
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
+  8ad68d1919de59aa60a40ffe97223796 '10.11.6'
 # Note: The following checksum is the patched CoreDisplay instead of IOKit in Sierra
 # we place here for minimal modification
   4e230b6586278b679034065be2cd36f0 '10.12 16A201w'
   9be148d87b4c02e0bf0719426f052e22 '10.12 16A238m'
-  e083715f10bf4bd0cb59e1dc02bb7781 '10.12 16A239j'
+  e083715f10bf4bd0cb59e1dc02bb7781 '10.12 16A254g'
 )
 
 function makeExit {
