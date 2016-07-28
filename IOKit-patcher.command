@@ -3,7 +3,8 @@
 thiscommand=$0
 
 # change for debug purposes
-IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+#IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+IOKitLocation="/Users/floris/Desktop/IOKit"
 
 # for development
 # IOKitLocation="/Users/user/Desktop/IOKit"
@@ -55,6 +56,7 @@ oToolIOKitUnpatched=(
   769a955b82a16fde0f1ae41eb4bdff7f '10.11.4' 6
   d8829f2234464985863c7a501c288547 '10.11.5' 6
   508dd6f7716e646fe9ad41293c9beded '10.11.6 15G12a' 6
+  630fd968d68a0255c790e3af60c3dd86 '10.11.6' 6
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
 )
 
@@ -66,7 +68,8 @@ oToolIOKitPatched=(
   637f064f5d76492f7ac5479e6554caa6 '10.11.4'
   5ff1819545b8e127728a904c8f41bc5f '10.11.5'
   75a4938445757cefab2ad9c53e58eb69 '10.11.6 15G12a'
-  7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
+  1190e8a79357e4358f4743740f6e0ae3 '10.11.6'
+  7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w' 
 )
 
 function makeExit {
