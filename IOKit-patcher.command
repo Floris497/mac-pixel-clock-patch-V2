@@ -3,8 +3,7 @@
 thiscommand=$0
 
 # change for debug purposes
-#IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
-IOKitLocation="/Users/floris/Desktop/IOKit"
+IOKitLocation="/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
 
 # for development
 # IOKitLocation="/Users/user/Desktop/IOKit"
