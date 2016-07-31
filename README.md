@@ -2,7 +2,7 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## 10.11.5 now supported by script (and 10.11.6 beta) 
+## 10.11.6 now supported by script 
 
 ## Experimental for 10.12 16A201w. there seem to be many changes in 10.12 Beta Soon to be added in a new patch file.
 ### This version has a new patch v7. I have at the moment no working 4k display..
