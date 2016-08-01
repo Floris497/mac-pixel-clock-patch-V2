@@ -4,7 +4,7 @@ Based on [my fork of the repository](https://github.com/floris497/mac-pixel-cloc
 
 ## 10.11.6 now supported by script 
 
-## Experimental for 10.12 16A201w. there seem to be many changes in 10.12 Beta Soon to be added in a new patch file.
+## For 10.12 please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved. 
 ### This version has a new patch v7. I have at the moment no working 4k display..
 ### Please try and use the 4k screen without the patch first, to see if it makes a difference.
 
@@ -29,12 +29,37 @@ This patch needs MD5's to identify IOKit and Nvidia driver files, if your versio
 
 If you have a new version of IOKit or Nvidia driver that is not yet supported you can run the command and choose the patch version yourself. for Nvidia there are now 2 versions, so most likely you need v2 for IOKit there are 6 versions so for new IOKit's you most likely need v6. use the command like ```XXXX-patcher.command patch v6``` Most of the time this will work, but use this function carefully.
 
+What patch do i need
+=
+The table might not be fully correct, also not all mac's are supported with this patch.
+| Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Dedicated Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Dedicated Graphics 10.12 and newer
+|---|---|---|---|---|---|---|
+| IOKit Patcher | YES | YES | Not Working | YES | NO | NO | NO
+| CoreDisplay Patcher | NO | NO | Not Working | NO | YES | YES | YES
+| Nvidia Patcher | NO | YES | N/A | NO | NO | YES | NO
+
+
 How to use
 =
 
-1. Download the patch you need
-2. run ```chmod +x XXXX-patcher.command``` (this makes it executable)
-3. run the script ```~/Downloads/XXXX-patcher.command``` if you use ```~/Downloads/XXXX-patcher.command help``` you will get a little bit of information about the script and the functions it has. (dragging the file into the terminal window will also work)
+Everywhere where you see `~/Downloads/XXXX-patcher.command` you can add 
+
+0. before you start make sure SIP is disabled. (Info about SIP)[#Some information on SIP]
+
+1. Download the patch(es) you need to your downloads folder: ([IOKit](./blob/master/IOKit-patcher.command), [CoreDisplay](./blob/master/CoreDisplay-patcher.command), [Nvidia](./blob/master/Nvidia-patcher.command))
+2. open the Terminal (found at /Applications/Utilities/Terminal.app)
+3. run `chmod +x ~/Downloads/XXXX-patcher.command` (this makes the patch executable)
+4. run the script `~/Downloads/XXXX-patcher.command` 
+5. follow the instructions and fill you password when asked for
+6. (if you need more than 1 patch, go back to step 3 here and continue with the next patch there)
+7. reboot your machine
+
+Next steps are not necessary for everyone:
+8. get switchresx and install it.
+9. add the custom resolution you need.
+10. save it and reboot your machine.
+
+extra functions: ```~/Downloads/XXXX-patcher.command md5|status|patch (v1-vX)|unpatch|help``` for instance used like: ```~/Downloads/IOKit-patcher.command patch v7``` or ```~/Downloads/Nvidia-patcher.command unpatch```
 
 If you wan't to request new functions for this script feel free to open an issue with the request.
 
