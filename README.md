@@ -4,9 +4,7 @@ Based on [my fork of the repository](https://github.com/floris497/mac-pixel-cloc
 
 ## 10.11.6 now supported by script 
 
-## For 10.12 please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved. 
-### This version has a new patch v7. I have at the moment no working 4k display..
-### Please try and use the 4k screen without the patch first, to see if it makes a difference.
+## For 10.12 please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
 
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
