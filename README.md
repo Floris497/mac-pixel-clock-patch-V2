@@ -31,8 +31,8 @@ What patch do i need
 =
 The table might not be fully correct, also not all mac's are supported with this patch.
 
-| Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Dedicated Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Dedicated Graphics 10.12 and newer
-|---|---|---|---|---|---|---|
+| | Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Dedicated Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Dedicated Graphics 10.12 and newer
+|---|---|---|---|---|---|---|---
 | IOKit Patcher | YES | YES | Not Working | YES | NO | NO | NO
 | CoreDisplay Patcher | NO | NO | Not Working | NO | YES | YES | YES
 | Nvidia Patcher | NO | YES | N/A | NO | NO | YES | NO
