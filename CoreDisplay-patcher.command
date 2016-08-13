@@ -19,11 +19,13 @@ oToolCoreDisplayCurrent="$(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q)"
 # for future use of detecting a false patch, where the executible's checksum is changed by codesigning but not the actual code.
 oToolCoreDisplayUnpatched=(
   49cd8062ed1c8f610b71e9a3231cf804 '10.12 16A254g' 1
+  8e1030235b90d6ab0644bd7a1b6f9cdb '10.12 16A284a' 1
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
 oToolCoreDisplayPatched=(
   4e469fbf1c36d96fc25fb931c6670649 '10.12 16A254g'
+  b6ee4943c2fce505faceb568e1c8f4b1 '10.12 16A284a'
 )
 
 function makeExit {
