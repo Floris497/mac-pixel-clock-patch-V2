@@ -71,4 +71,4 @@ the changes to SIP are only visible in the terminal after a reboot, so it will s
 
 SIP can safely be enabled after the patch of the IOKit, if you also want to use an Nvidia/AMD driver that has been patched you need to keep SIP disabled. this is because SIP will not allow you to run drivers which have a broken or no codesignature. by patching the driver we obviously break the codesignature.
 kexts are not signable by anyone but apple and trusted parties. so SIP needs to be off for them to load.
-IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificat, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit.
+IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificate, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit.
