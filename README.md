@@ -2,7 +2,7 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## 10.11.6 now supported by script 
+## 10.11.6 now supported by script
 
 ## For 10.12 please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
 
@@ -16,7 +16,7 @@ If this patch helped you, and you are happy with the result you could consider m
 
 # A few things to keep in mind
 
-* Disable SIP (more info below)
+* Disable SIP ([more info below](#some-information-on-sip))
 * For Nvidia SIP needs to stay disabled for IOKit it can be enabled again after patching
 * Nvidia patch needs IOKit patch to be effective (maybe not always)
 * If using an adapter make sure this is not the problem.
@@ -41,14 +41,14 @@ The table might not be fully correct, also not all mac's are supported with this
 How to use
 =
 
-Everywhere where you see `~/Downloads/XXXX-patcher.command` you can add 
+Everywhere where you see `~/Downloads/XXXX-patcher.command` you can add
 
-0. before you start make sure SIP is disabled. (Info about SIP)[#Some information on SIP]
+0. before you start make sure SIP is disabled. ([Info about SIP](#some-information-on-sip))
 
 1. Download the patch(es) you need to your downloads folder: ([IOKit](./blob/master/IOKit-patcher.command), [CoreDisplay](./blob/master/CoreDisplay-patcher.command), [Nvidia](./blob/master/Nvidia-patcher.command))
 2. open the Terminal (found at /Applications/Utilities/Terminal.app)
 3. run `chmod +x ~/Downloads/XXXX-patcher.command` (this makes the patch executable)
-4. run the script `~/Downloads/XXXX-patcher.command` 
+4. run the script `~/Downloads/XXXX-patcher.command`
 5. follow the instructions and fill you password when asked for
 6. (if you need more than 1 patch, go back to step 3 here and continue with the next patch there)
 7. reboot your machine
@@ -62,7 +62,7 @@ extra functions: ```~/Downloads/XXXX-patcher.command md5|status|patch (v1-vX)|un
 
 If you wan't to request new functions for this script feel free to open an issue with the request.
 
-##### Some information on SIP
+### Some information on SIP
 
 First make sure SIP (System Integrity Protection) is turned off for this to work.
 You can disable/enable this only when you boot into the recovery partition.
@@ -71,4 +71,4 @@ the changes to SIP are only visible in the terminal after a reboot, so it will s
 
 SIP can safely be enabled after the patch of the IOKit, if you also want to use an Nvidia/AMD driver that has been patched you need to keep SIP disabled. this is because SIP will not allow you to run drivers which have a broken or no codesignature. by patching the driver we obviously break the codesignature.
 kexts are not signable by anyone but apple and trusted parties. so SIP needs to be off for them to load.
-IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificat, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit. 
+IOKit is not a kernel extension and therefore must be codesigned to run, this is done with the wildcard certificate, unique to everyone. even with SIP disabled the IOKit will not run without this new codesignature. the script takes care of the codesigning of the IOKit.
