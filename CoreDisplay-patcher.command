@@ -23,6 +23,8 @@ oToolCoreDisplayUnpatched=(
   f4c6e84ffa97e06624e5504edd87bf7d '10.12 16A284a' 1 # I don't know why these two are different
   4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
+  eb27b5d68e9fb15aa65ea0153637eae2 '10.12 16A319' 1 # Sierra 10.12 GM
+
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -32,6 +34,7 @@ oToolCoreDisplayPatched=(
   82f97933a3ae90d47054316fa8259f6c '10.12 16A284a'
   1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
+  a49d5686b574138b4d2e66e0edac93c0 '10.12 16A319'
 )
 
 function makeExit {
