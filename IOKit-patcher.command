@@ -58,6 +58,7 @@ oToolIOKitUnpatched=(
   630fd968d68a0255c790e3af60c3dd86 '10.11.6' 6
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
   21272ae806c3b4ddc593c34ba5d586c0 '10.12 16A254g' 7
+  ae74383a4ad6b423d0f5a858cdd31744 '10.12 release' 7
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -71,6 +72,7 @@ oToolIOKitPatched=(
   1190e8a79357e4358f4743740f6e0ae3 '10.11.6'
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
   0ed77ee06dbeed3b6558f6ac7f14cc40 '10.12 16A254g'
+  cccfab8f0ef23c1c017453f87fb8594e '10.12 release'
 )
 
 function makeExit {
@@ -92,8 +94,8 @@ function SIPInfo {
 
 function help {
   printf "using this script without input will patch IOKit if supported version found\n"
-  printf "patch [v1-v6]\t patch on a specific version\n"
-  printf "\t\t eg. $(basename $thiscommand) patch v6\n"
+  printf "patch [v1-v7]\t patch on a specific version\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v7\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
