@@ -23,7 +23,7 @@ oToolCoreDisplayUnpatched=(
   f4c6e84ffa97e06624e5504edd87bf7d '10.12 16A284a' 1 # I don't know why these two are different
   4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
-  aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
+  aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 2  # Sierra 10.12 release
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -33,7 +33,8 @@ oToolCoreDisplayPatched=(
   82f97933a3ae90d47054316fa8259f6c '10.12 16A284a'
   1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
-  eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
+  eb27b5d68e9fb15aa65ea0153637eae2 '10.12  patch 1'  # Sierra 10.12 release
+  996d5f073e016989518ad088ce4b5db7 '10.12  patch 2'  # Sierra 10.12 release
 )
 
 function makeExit {
@@ -55,8 +56,8 @@ function SIPInfo {
 
 function help {
   printf "using this script without input will patch CoreDisplay if supported version found\n"
-  printf "patch [v1-v6]\t patch on a specific version\n"
-  printf "\t\t eg. $(basename $thiscommand) patch v1\n"
+  printf "patch [v1-v2]\t patch on a specific version\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v2\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
@@ -89,6 +90,12 @@ function CoreDisplayPatch {
 	    printf "Re-singing $CoreDisplayLocation\n"
 	    sudo codesign -f -s - $CoreDisplayLocation
 	    ;;
+  2)  printf "Patching CoreDisplay with patch version 1\n"
+      sudo perl -i.bak -pe '$before = qr"\x4E\x20\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x4E\x20\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
+  	  sudo touch /System/Library/Extensions
+  	  printf "Re-singing $CoreDisplayLocation\n"
+  	  sudo codesign -f -s - $CoreDisplayLocation
+      ;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
       exit
       ;;
