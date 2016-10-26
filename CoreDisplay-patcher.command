@@ -24,6 +24,7 @@ oToolCoreDisplayUnpatched=(
   4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
   aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
+  172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -34,6 +35,7 @@ oToolCoreDisplayPatched=(
   1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
   eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
+  cf8373138af4671a561c1a4d6cdba771 '10.12.1'
 )
 
 function makeExit {
@@ -55,8 +57,8 @@ function SIPInfo {
 
 function help {
   printf "using this script without input will patch CoreDisplay if supported version found\n"
-  printf "patch [v1-v6]\t patch on a specific version\n"
-  printf "\t\t eg. $(basename $thiscommand) patch v1\n"
+  printf "patch [v1-v2]\t patch on a specific version\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v2\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
@@ -84,11 +86,17 @@ function CoreDisplayPatch {
   testSIP
   case "$1" in
   1)  printf "Patching CoreDisplay with patch version 1\n"
-      sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x0F\x1F\x00\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
-	    sudo touch /System/Library/Extensions
-	    printf "Re-singing $CoreDisplayLocation\n"
-	    sudo codesign -f -s - $CoreDisplayLocation
-	    ;;
+      	sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x0F\x1F\x00\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
+	  	sudo touch /System/Library/Extensions
+	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	sudo codesign -f -s - $CoreDisplayLocation
+	  	;;
+  2)  printf "Patching CoreDisplay with patch version 2\n"
+		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x96\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x97\x04\x00\x00\x90/g' $CoreDisplayLocation
+	 	sudo touch /System/Library/Extensions
+	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	sudo codesign -f -s - $CoreDisplayLocation
+	  	;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
       exit
       ;;
@@ -204,7 +212,7 @@ function options {
     esac
     testCoreDisplayPatch 
     exit 
-  elif [[ $1 == 'unpatch' ]]; then
+  elif [[ $1 == 'unpatch' ]] || [[ $1 == 'depatch' ]]; then
     if [[ ! -f "$CoreDisplayLocation.bak" ]]; then
       printf "There is no backup file, we can not undo the patch. the patch might not even been done.\n"
       makeExit
@@ -216,7 +224,7 @@ function options {
   elif [[ $1 == 'md5' ]]; then
     CoreDisplayPrintAllMD5
     exit
-  elif [[ $1 == 'help' ]]; then
+  elif [[ $1 == 'help' ]] || [[ $1 == '-h' ]] || [[ $1 == '--help' ]]; then
     help
     exit
   elif [[ -z $1 ]]; then
