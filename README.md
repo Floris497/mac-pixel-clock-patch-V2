@@ -2,9 +2,9 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## 10.11.6 now supported by script
+## 10.12.1 now supported by script
 
-## For 10.12 please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
+## For 10.12 and up please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
 
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
