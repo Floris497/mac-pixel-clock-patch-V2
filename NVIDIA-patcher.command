@@ -2,7 +2,7 @@
 
 thiscommand=$0
 
-# location of the driver executible
+# location of the driver executable
 NVDALocation="/System/Library/Extensions/NVDAGK100Hal.kext/Contents/MacOS/NVDAGK100Hal"
 
 # for development
@@ -28,6 +28,7 @@ NVDAMD5Unpatched=(
   840234288d56c2171e75083dfdd6b1d9 '10.11.4' 2
   62e429ce9f61893a5b7379b0b0b9839f '10.11.5' 2
   3fa41c5c3c1074a1e535ac97f60758de '10.11.5 14F1808' 2
+  93bc574ecbef134a62400e21811b1b7b ’10.11.6 15G1108’ 2
 )
 
 # md5 checksums of patched Nvidia files
@@ -44,6 +45,7 @@ NVDAMD5Patched=(
   fa463e9b414b02538e12044c365636a3 '10.11.4'
   bba91da3d3208e36c24c7a64562c6eed '10.11.5'
   f806a5fc95cc382390cb02058abdf852 '10.11.5 14F1808'
+  6bbc0a24e8b2d423181c2fdf4dbe986a ’10.11.6 15G1108’ 2
 )
 
 function makeExit {
@@ -103,7 +105,7 @@ function NVDAPatch {
       sudo perl -i.bak -pe '$oldLimit1 = qr"\xC7\x82\xD0\x00\x00\x00\x88\x84\x02\x00"s;$newLimit1 = "\xC7\x82\xD0\x00\x00\x00\x80\x1A\x06\x00";$oldLimit2 = qr"\xC7\x82\x20\x01\x00\x00\x88\x84\x02\x00"s;$newLimit2 = "\xC7\x82\x20\x01\x00\x00\x80\x1A\x06\x00";s/$oldLimit1/$newLimit1/g;s/$oldLimit2/$newLimit2/g' $NVDALocation
       sudo touch /System/Library/Extensions
       ;;
-  *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
+  *)  printf "This patch does not exist, make sure you used the right patch identifier\n"
       exit
       ;;
   esac
@@ -137,9 +139,9 @@ function testNVDAPatch {
   if [[ ! -f "$NVDALocation.bak" ]]; then
     echo "Patch failed to run"
   elif [[ $(md5 -q $NVDALocation.bak) !=  $(md5 -q $NVDALocation) ]]; then
-    echo "The code of the driver has changed, the patch was probbably succesfull"
+    echo "The code of the driver has changed, the patch was probably successful"
   else
-    echo "The code is still the same.. Patch did seem to run, but was probbably from the wrong version.."
+    echo "The code is still the same.. Patch did seem to run, but was probably from the wrong version.."
     echo "If you are running an new os run $thiscommand md5 and ask the maintainer of this script to add support for your system"
   fi
 
@@ -179,7 +181,7 @@ function options {
     #test if there is a backup file
     if [[ -f "$NVDALocation.bak" ]]; then
       printf "An backup file already exists, if you force this patch on an already patched version you will loose the original backup!\n"
-      printf "This will lead you to reinstall the OS if you loose a working version of the driver. be carefull!\n"
+      printf "This will lead you to reinstall the OS if you loose a working version of the driver. be careful!\n"
       printf "It might be wise to undo the patch before trying to redo it using: $thiscommand unpatch\n"
       askExit
     fi
