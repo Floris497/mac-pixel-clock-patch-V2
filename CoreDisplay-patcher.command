@@ -25,6 +25,8 @@ oToolCoreDisplayUnpatched=(
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
   aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
   172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
+  0657d9fee305e1beeea8ddf0c833d9d5 '10.12.2 BETA: 16C32f' 3
+  
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -36,6 +38,7 @@ oToolCoreDisplayPatched=(
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
   eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
   cf8373138af4671a561c1a4d6cdba771 '10.12.1'
+  b57e581f4d047848cf288a8a6c39c7ce '10.12.2 BETA: 16C32f'
 )
 
 function makeExit {
@@ -52,12 +55,12 @@ function askExit {
 }
   
 function SIPInfo {
-  printf "more info: https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html\n"
+  printf "more info: Google 'SIP'\n"
 }
 
 function help {
   printf "using this script without input will patch CoreDisplay if supported version found\n"
-  printf "patch [v1-v2]\t patch on a specific version\n"
+  printf "patch [v1-v3]\t patch on a specific version\n"
   printf "\t\t eg. $(basename $thiscommand) patch v2\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
@@ -94,6 +97,12 @@ function CoreDisplayPatch {
   2)  printf "Patching CoreDisplay with patch version 2\n"
 		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x96\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x97\x04\x00\x00\x90/g' $CoreDisplayLocation
 	 	sudo touch /System/Library/Extensions
+	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	sudo codesign -f -s - $CoreDisplayLocation
+	  	;;
+  3)  printf "Patching CoreDisplay with patch version 2\n"
+  		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\xAD\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\xAE\x04\x00\x00\x90/g' $CoreDisplayLocation
+	  	sudo touch /System/Library/Extensions
 	  	printf "Re-singing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
@@ -208,6 +217,7 @@ function options {
     case "$2" in
       v1) CoreDisplayPatch 1;;
       v2) CoreDisplayPatch 2;;
+	  v3) CoreDisplayPatch 3;;
       *)  CoreDisplayPatch 0;;
     esac
     testCoreDisplayPatch 
