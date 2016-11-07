@@ -100,7 +100,7 @@ function CoreDisplayPatch {
 	  	printf "Re-singing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
-  3)  printf "Patching CoreDisplay with patch version 2\n"
+  3)  printf "Patching CoreDisplay with patch version 3\n"
   		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\xAD\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\xAE\x04\x00\x00\x90/g' $CoreDisplayLocation
 	  	sudo touch /System/Library/Extensions
 	  	printf "Re-singing $CoreDisplayLocation\n"
