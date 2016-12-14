@@ -2,7 +2,7 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## 10.12.1 now supported by script (10.12.X does not work for everyone that used 10.11 succesfully)
+## CoreDisplay 10.12.2 now supported by script (10.12 does not work for everyone that used 10.11 succesfully)
 
 ## Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
 
