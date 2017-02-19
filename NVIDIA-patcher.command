@@ -68,7 +68,7 @@ function SIPInfo {
 function help {
   printf "using this script without input will patch the NVIDIA driver if a supported version found\n"
   printf "patch [v1-v2]\t patch on a specific version\n"
-  printf "\t\t eg. $(basename $thiscommand) patch v2\n"
+  printf "\t\t eg. $(basename $thiscommand) patch v2 (v3 experimental)\n"
   printf "unpatch\t\t undo patch\n"
   printf "status\t\t Shows you if you have an known or unknown patch\n"
   printf "md5\t\t gives all your md5 hashes\n"
@@ -105,6 +105,10 @@ function NVDAPatch {
       sudo perl -i.bak -pe '$oldLimit1 = qr"\xC7\x82\xD0\x00\x00\x00\x88\x84\x02\x00"s;$newLimit1 = "\xC7\x82\xD0\x00\x00\x00\x80\x1A\x06\x00";$oldLimit2 = qr"\xC7\x82\x20\x01\x00\x00\x88\x84\x02\x00"s;$newLimit2 = "\xC7\x82\x20\x01\x00\x00\x80\x1A\x06\x00";s/$oldLimit1/$newLimit1/g;s/$oldLimit2/$newLimit2/g' $NVDALocation
       sudo touch /System/Library/Extensions
       ;;
+  3)  printf "Patching $NVDABasename with patch version 3\n"
+	  sudo perl -i.bak -pe '$oldLimit1 = qr"\x8B\x82\xD0\x00\x00\x00\xB9\x88\x84\x02\x00"s;$newLimit1 = "\x8B\x82\xD0\x00\x00\x00\xB9\x80\x1A\x06\x00";s/$oldLimit1/$newLimit1/g' $NVDALocation
+	  sudo touch /System/Library/Extensions
+	  ;;
   *)  printf "This patch does not exist, make sure you used the right patch identifier\n"
       exit
       ;;
@@ -192,6 +196,7 @@ function options {
     case "$2" in
       v1) NVDAPatch 1;;
       v2) NVDAPatch 2;;
+	  v3) NVDAPatch 3;;
       *)  NVDAPatch 0;;
     esac
     testNVDAPatch

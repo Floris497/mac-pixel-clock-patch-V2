@@ -59,6 +59,7 @@ oToolIOKitUnpatched=(
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
   21272ae806c3b4ddc593c34ba5d586c0 '10.12 16A254g' 7
   9189a21226c0de8b87c29894f9c374c2 '10.12.1 16B2555' 7
+  7feaaa1daf13e4025123fe64dce955c4 '10.12.4 16E154a BETA 1' 7
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -73,6 +74,7 @@ oToolIOKitPatched=(
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
   0ed77ee06dbeed3b6558f6ac7f14cc40 '10.12 16A254g'
   17e65a8347c3d4692802b7afbd9bd8f5 '10.12.1 16B2555'
+  1db1a1ae63df458cb76849e56b6ec1fb '10.12.4 16E154a BETA 1'
 )
 
 function makeExit {
@@ -138,25 +140,25 @@ function IOKitPatch {
   4)  printf "Patching IOKit with patch version 4\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x9D\x03\x00\x00"s;s/$before/\xE9\x84\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing $IOKitLocation\n"
+      printf "Re-signing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
   5)  printf "Patching IOKit with patch version 5\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x9E\x03\x00\x00"s;s/$before/\xE9\x83\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing $IOKitLocation\n"
+      printf "Re-signing $IOKitLocation\n"
     	sudo codesign -f -s - $IOKitLocation
       ;;
   6)  printf "Patching IOKit with patch version 6\n"
       sudo perl -i.bak -pe '$before = qr"\x0F\x85\x92\x03\x00\x00"s;s/$before/\xE9\x7A\x03\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing $IOKitLocation\n"
+      printf "Re-signing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
   7)  printf "Patching IOKit with patch version 7\n"
       sudo perl -i.bak -pe '$before = qr"\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\xF6\xC1\x01\xE9\x06\x04\x00\x00\x90/g' $IOKitLocation
       sudo touch /System/Library/Extensions
-      printf "Re-singing $IOKitLocation\n"
+      printf "Re-signing $IOKitLocation\n"
       sudo codesign -f -s - $IOKitLocation
       ;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"

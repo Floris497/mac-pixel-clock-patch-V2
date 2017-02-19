@@ -2,7 +2,7 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## CoreDisplay 10.12.2 now supported by script (10.12 does not work for everyone that used 10.11 succesfully)
+## CoreDisplay 10.12.3 now supported by script (And 10.12.4 beta)
 
 ## Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
 
@@ -32,11 +32,11 @@ What patch do i need
 =
 The table might not be fully correct, also not all mac's are supported with this patch.
 
-| PATCH               | Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Dedicated Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Dedicated Graphics 10.12 and newer |
-|---------------------|-----------------------------------|----------------------------------------|--------------|-------------------------------------------|-----------------------------------|----------------------------------------|-------------------------------------------|
-| IOKit Patcher       | YES                               | YES                                    | Not Working  | YES                                       | NO                                | NO                                     | NO                                        |
-| CoreDisplay Patcher | NO                                | NO                                     | Not Working  | NO                                        | YES                               | YES                                    | YES                                       |
-| Nvidia Patcher      | NO                                | YES                                    | N/A          | NO                                        | NO                                | YES                                    | NO                                        |
+| PATCH               | Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Desktop Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Desktop Graphics 10.12 and newer |
+|---------------------|-----------------------------------|----------------------------------------|--------------|-----------------------------------------|-----------------------------------|----------------------------------------|-----------------------------------------|
+| IOKit Patcher       | YES                               | YES                                    | Not Working  | YES                                     | NO                                | NO                                     | NO                                      |
+| CoreDisplay Patcher | NO                                | NO                                     | Not Working  | NO                                      | YES                               | YES                                    | YES                                     |
+| Nvidia Patcher      | NO                                | YES                                    | N/A          | NO                                      | NO                                | YES                                    | NO                                      |
 
 
 How to use

@@ -25,7 +25,8 @@ oToolCoreDisplayUnpatched=(
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
   aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
   172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
-  9c717568024daa81c364a839f09a1bfd '10.12.2 16C67' 3
+  9c717568024daa81c364a839f09a1bfd '10.12.2 and 10.12.3' 3
+  b4929ec8eb248b7317b258ba1014955c '10.12.4 16E154a BETA 1' 3 # will be removed after 10.12.4 release
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -37,7 +38,8 @@ oToolCoreDisplayPatched=(
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
   eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
   cf8373138af4671a561c1a4d6cdba771 '10.12.1'
-  e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 16C67' 3
+  e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 and 10.12.3'
+  01e0c81594739ec3f348a95df84d313b '10.12.4 16E154a BETA 1'
 )
 
 function makeExit {
@@ -90,19 +92,19 @@ function CoreDisplayPatch {
   1)  printf "Patching CoreDisplay with patch version 1\n"
       	sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x0F\x1F\x00\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
 	  	sudo touch /System/Library/Extensions
-	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	printf "Re-signing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
   2)  printf "Patching CoreDisplay with patch version 2\n"
 		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x96\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x97\x04\x00\x00\x90/g' $CoreDisplayLocation
 	 	sudo touch /System/Library/Extensions
-	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	printf "Re-signing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
   3)  printf "Patching CoreDisplay with patch version 3\n"
   		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\xAD\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\xAE\x04\x00\x00\x90/g' $CoreDisplayLocation
 	  	sudo touch /System/Library/Extensions
-	  	printf "Re-singing $CoreDisplayLocation\n"
+	  	printf "Re-signing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
