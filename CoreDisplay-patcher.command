@@ -29,6 +29,7 @@ oToolCoreDisplayUnpatched=(
   b4929ec8eb248b7317b258ba1014955c '10.12.4 16E154a BETA 1' 3 # will be removed after 10.12.4 release
   8c2bed751070125fe421521c8fa45d50 '10.12.4 16E175b BETA 4' 3 # will be removed after 10.12.4 release
   d7909217b001a839600fc9cc49003be8 '10.12.4 16E183b BETA 5 and 6' 3 # will be removed after 10.12.4 release
+  b7e8464b101f343012ba28cbd2db5ee8 '10.12.4 16E195' 3
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -44,6 +45,7 @@ oToolCoreDisplayPatched=(
   01e0c81594739ec3f348a95df84d313b '10.12.4 16E154a BETA 1'
   48624391fa7688a9fadff5d98ae1a30b '10.12.4 16E154a BETA 4'
   f62864b8873912d84102722f99f8c7a3 '10.12.4 16E183b BETA 5 and 6'
+  ec01e0df5f71699c77bf2650a1c84f4f '10.12.4 16E195'
 )
 
 function makeExit {
