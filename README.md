@@ -28,16 +28,16 @@ This patch needs MD5's to identify IOKit and Nvidia driver files, if your versio
 
 If you have a new version of IOKit or Nvidia driver that is not yet supported you can run the command and choose the patch version yourself. for Nvidia there are now 2 versions, so most likely you need v2 for IOKit there are 6 versions so for new IOKit's you most likely need v6. use the command like ```XXXX-patcher.command patch v6``` Most of the time this will work, but use this function carefully.
 
-What patch do i need
+What patch do I need?
 =
-The table might not be fully correct, also not all mac's are supported with this patch.
+The table might not be fully correct, and not all Macs are supported by this patch.
 
-| PATCH               | Intel HD Graphics 10.11 and below | Nvidia Mobile Graphics 10.11 and below | AMD Graphics | Nvidia Desktop Graphics 10.11 and below | Intel HD Graphics 10.12 and newer | Nvidia Mobile Graphics 10.12 and newer | Nvidia Desktop Graphics 10.12 and newer |
-|---------------------|-----------------------------------|----------------------------------------|--------------|-----------------------------------------|-----------------------------------|----------------------------------------|-----------------------------------------|
-| IOKit Patcher       | YES                               | YES                                    | Not Working  | YES                                     | NO                                | NO                                     | NO                                      |
-| CoreDisplay Patcher | NO                                | NO                                     | Not Working  | NO                                      | YES                               | YES                                    | YES                                     |
-| Nvidia Patcher      | NO                                | YES                                    | N/A          | NO                                      | NO                                | YES                                    | NO                                      |
-
+|  | OS X <= 10.11 | macOS >= 10.12 |
+|--|---------------|----------------|
+| **Intel HD Graphics** | IOKit Patcher | CoreDisplay Patcher |
+| **Nvidia Desktop Graphics** | IOKit Patcher |  CoreDisplay Patcher |
+| **Nvidia Mobile Graphics** | IOKit Patcher & Nvidia Patcher | CoreDisplay Patcher & Nvidia Patcher |
+| **AMD Graphics** | [N/A](https://github.com/Floris497/mac-pixel-clock-patch-V2/issues/142) | [N/A](https://github.com/Floris497/mac-pixel-clock-patch-V2/issues/142) |
 
 How to use
 =
