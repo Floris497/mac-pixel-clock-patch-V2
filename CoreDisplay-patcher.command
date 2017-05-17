@@ -26,10 +26,8 @@ oToolCoreDisplayUnpatched=(
   aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
   172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
   9c717568024daa81c364a839f09a1bfd '10.12.2 and 10.12.3' 3
-  b4929ec8eb248b7317b258ba1014955c '10.12.4 16E154a BETA 1' 3 # will be removed after 10.12.4 release
-  8c2bed751070125fe421521c8fa45d50 '10.12.4 16E175b BETA 4' 3 # will be removed after 10.12.4 release
-  d7909217b001a839600fc9cc49003be8 '10.12.4 16E183b BETA 5 and 6' 3 # will be removed after 10.12.4 release
   b7e8464b101f343012ba28cbd2db5ee8 '10.12.4 16E195' 3
+  54a5a1adfb1225411bacf5c3ee0b4d9a '10.12.5 16F73' 3
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -42,10 +40,8 @@ oToolCoreDisplayPatched=(
   eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
   cf8373138af4671a561c1a4d6cdba771 '10.12.1'
   e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 and 10.12.3'
-  01e0c81594739ec3f348a95df84d313b '10.12.4 16E154a BETA 1'
-  48624391fa7688a9fadff5d98ae1a30b '10.12.4 16E154a BETA 4'
-  f62864b8873912d84102722f99f8c7a3 '10.12.4 16E183b BETA 5 and 6'
   ec01e0df5f71699c77bf2650a1c84f4f '10.12.4 16E195'
+  8b876f14be2bf7b1bfd3f89341bce0f6 '10.12.5 16F73'
 )
 
 function makeExit {
