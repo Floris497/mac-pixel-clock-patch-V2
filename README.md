@@ -2,7 +2,7 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## CoreDisplay 10.12.3 now supported by script (And 10.12.4 beta)
+## CoreDisplay 10.12.5 now supported by script and Nvidia WEB drivers (Maxwell & Pascal) (GTX 1080, GTX 1070, GTX 1060)
 
 ## Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
 
