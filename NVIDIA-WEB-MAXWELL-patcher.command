@@ -16,12 +16,12 @@ NVDACurrent="$(md5 -q $NVDALocation)"
 # md5 checksums of unpatched Nvidia files
 
 NVDAMD5Unpatched=(
-
+	e351c25f7f11665b4c8b38675b7d3a51 'nvidia web MAXWELL: 378.05.05.15f01 (10.18.5)' 1
 )
 
 # md5 checksums of patched Nvidia files
 NVDAMD5Patched=(
-
+ 	059e81a8ffb42e41e57de6686a71d6e4 'nvidia web MAXWELL: 378.05.05.15f01 (10.18.5)'
 )
 
 function makeExit {

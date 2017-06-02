@@ -16,14 +16,14 @@ NVDACurrent="$(md5 -q $NVDALocation)"
 # md5 checksums of unpatched Nvidia files
 
 NVDAMD5Unpatched=(
-  0ee0407775db6da70015dbcc75780e66 'nvidia web: 378.05.05.05f02 (10.17.34)' 1
-  cbe4cf2687f7828c64a1698a910ae124 'nvidia web: 378.05.05.15f01 (10.18.5)' 1
+  0ee0407775db6da70015dbcc75780e66 'nvidia web PASCAL: 378.05.05.05f02 (10.17.34)' 1
+  cbe4cf2687f7828c64a1698a910ae124 'nvidia web PASCAL: 378.05.05.15f01 (10.18.5)' 1
 )
 
 # md5 checksums of patched Nvidia files
 NVDAMD5Patched=(
-  096a081347024086efa8d396d814afd0 'nvidia web: 378.05.05.05f02 (10.17.34)'
-  0ee0407775db6da70015dbcc75780e66 'nvidia web: 378.05.05.15f01 (10.18.5)'
+  096a081347024086efa8d396d814afd0 'nvidia web PASCAL: 378.05.05.05f02 (10.17.34)'
+  0ee0407775db6da70015dbcc75780e66 'nvidia web PASCAL: 378.05.05.15f01 (10.18.5)'
 )
 
 function makeExit {
