@@ -59,7 +59,7 @@ oToolIOKitUnpatched=(
   eec08b5bc022d7dc7b3e7bdfc65f2c4c '10.12 16A201w' 7
   21272ae806c3b4ddc593c34ba5d586c0 '10.12 16A254g' 7
   9189a21226c0de8b87c29894f9c374c2 '10.12.1 16B2555' 7
-  7feaaa1daf13e4025123fe64dce955c4 '10.12.4 16E154a BETA 1' 7
+  991df1fc5d2538f50a7e58e55f3a8fba '10.12.5 16F73 and 10.12.6 16G29' 7
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched IOKits
@@ -74,7 +74,7 @@ oToolIOKitPatched=(
   7e2b43ddd2d3b7898dd90704218d5381 '10.12 16A201w'
   0ed77ee06dbeed3b6558f6ac7f14cc40 '10.12 16A254g'
   17e65a8347c3d4692802b7afbd9bd8f5 '10.12.1 16B2555'
-  1db1a1ae63df458cb76849e56b6ec1fb '10.12.4 16E154a BETA 1'
+  9c0fd2c41653c197de42ca449b3cef55 '10.12.5 16F73 and 10.12.6 16G29'
 )
 
 function makeExit {
@@ -91,7 +91,8 @@ function askExit {
 }
   
 function SIPInfo {
-  printf "more info: https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html\n"
+  #printf "more info: https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html\n"
+  printf "more info about SIP on https://apple.com/support\n"
 }
 
 function help {
