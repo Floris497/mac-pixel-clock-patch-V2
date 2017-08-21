@@ -111,6 +111,12 @@ function CoreDisplayPatch {
 	  	printf "Re-signing $CoreDisplayLocation\n"
 	  	sudo codesign -f -s - $CoreDisplayLocation
 	  	;;
+  4)  printf "Patching CoreDisplay with patch version 4\n"
+  		sudo perl -i.bak -pe '$before = qr"\xE9\x53\x04\x00\x00\x90\xF6\xC1\x04\x74\x0B\x41\xF6\x46"s;s/$before/\x0F\x85\x52\x04\x00\x00\xF6\xC1\x04\x74\x0B\x41\xF6\x46/g' $CoreDisplayLocation
+   		sudo touch /System/Library/Extensions
+    	printf "Re-signing $CoreDisplayLocation\n"
+    	sudo codesign -f -s - $CoreDisplayLocation
+    	;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
       exit
       ;;
