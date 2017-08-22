@@ -229,6 +229,7 @@ function options {
       v1) CoreDisplayPatch 1;;
       v2) CoreDisplayPatch 2;;
 	  v3) CoreDisplayPatch 3;;
+	  v4) CoreDisplayPatch 4;;
       *)  CoreDisplayPatch 0;;
     esac
     testCoreDisplayPatch 
