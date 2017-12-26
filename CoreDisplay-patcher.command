@@ -83,7 +83,10 @@ function testSIP {
       askExit
     elif [[ "$(csrutil status | head -n 1)" == *"status: enabled"* ]]; then
       printf "SIP is enabled, this script will only work if SIP is disabled\n"
-      makeExit
+      if [[ -z $1 ]]; then
+        makeExit
+      fi
+      
     elif [[ "$(csrutil status | head -n 1)" == *"status: disabled"* ]]; then
       printf "SIP looks to be disabled, all good!\n"
     fi
@@ -166,7 +169,12 @@ function testCoreDisplayPatch {
 }
 
 function test {
-  testSIP
+  if [[ ! -z $1 && $1 == "status" ]]; then
+    testSIP "Don't Exit"  # Just checking patch status, can do it even if SIP is enabled
+  else
+    testSIP
+  fi
+  
   printf "\n"
   nothingWasFound=true;
   for ((i=0; i < ${#CoreDisplayUnpatched[@]}; i+=3)); do
@@ -241,7 +249,7 @@ function options {
     fi
     CoreDisplayUnpatch
   elif [[ $1 == 'test' ]] || [[ $1 == 'status' ]]; then
-    test
+    test 'status'
     exit
   elif [[ $1 == 'md5' ]]; then
     CoreDisplayPrintAllMD5
