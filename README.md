@@ -2,11 +2,11 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## CoreDisplay 10.12.5 now supported by script and Nvidia WEB drivers (Maxwell & Pascal) (GTX 1080, GTX 1070, GTX 1060)
+## CoreDisplay 10.13.2 now supported by script (DID ONLY TEST FOR MYSELF YET) and Nvidia WEB drivers (Maxwell & Pascal) (GTX 1080, GTX 1070, GTX 1060)
 
-## Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
+### Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
 
-## For 10.12 and up please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
+### For 10.12 and later please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
 
@@ -14,6 +14,9 @@ If this patch helped you, and you are happy with the result you could consider m
 
 * makes 4K/3840x2160/UHD/2560x1080/3440x1440 resolutions possible on older macs over both HDMI and DisplayPort. (other odd/high resolutions should also work)
 * Enables HDMI2.0 on Nvidia Maxwell cards (Never tested this myself, for this you only need the IOKit patch not the Nvidia patch)
+
+# Copy Paste issues
+To resolve issues with copy paste run `sudo update_dyld_shared_cache` in the terminal.. from patch v4 this is already ran after patching but it might need to be run again after reboot.. some testing needed.
 
 # A few things to keep in mind
 
