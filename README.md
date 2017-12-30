@@ -15,8 +15,12 @@ If this patch helped you, and you are happy with the result you could consider m
 * makes 4K/3840x2160/UHD/2560x1080/3440x1440 resolutions possible on older macs over both HDMI and DisplayPort. (other odd/high resolutions should also work)
 * Enables HDMI2.0 on Nvidia Maxwell cards (Never tested this myself, for this you only need the IOKit patch not the Nvidia patch)
 
-# Copy Paste issues
-To resolve issues with copy paste run `sudo update_dyld_shared_cache` in the terminal.. from patch v4 this is already ran after patching but it might need to be run again after reboot.. some testing needed.
+# WARNING!! Copy Paste might be broken after patch.. [FIX BELOW]
+To resolve issues with copy paste run: 
+``` bash
+sudo update_dyld_shared_cache
+``` 
+in the terminal.. from patch v4 and later this is already ran after patching but it might need to be run AGAIN after reboot.. some testing needed.
 
 # A few things to keep in mind
 
