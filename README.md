@@ -53,7 +53,7 @@ Everywhere where you see `~/Downloads/XXXX-patcher.command` you can add
 
 0. before you start make sure SIP is disabled. ([Info about SIP](#some-information-on-sip))
 
-1. Download the patch(es) you need to your downloads folder: ([IOKit](./IOKit-patcher.command), [CoreDisplay](./CoreDisplay-patcher.command), [Nvidia](./Nvidia-patcher.command))
+1. Download the patch(es) you need to your downloads folder: ([IOKit](./IOKit-patcher.command), [CoreDisplay](./CoreDisplay-patcher.command), [Nvidia](./NVIDIA-patcher.command))
 2. open the Terminal (found at /Applications/Utilities/Terminal.app)
 3. run `chmod +x ~/Downloads/XXXX-patcher.command` (this makes the patch executable)
 4. run the script `~/Downloads/XXXX-patcher.command`
