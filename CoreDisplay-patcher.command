@@ -129,6 +129,7 @@ function CoreDisplayPatch {
 		sudo update_dyld_shared_cache
     	;;
   5)  printf "Patching CoreDisplay with patch version 4\n"
+		# inspired from: https://github.com/PMheart/CoreDisplayFixup/commit/c9c37a1040584e38cd3ccc53b1dac15df988ba11
 		sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
 		sudo touch /System/Library/Extensions
 		printf "Re-signing $CoreDisplayLocation\n"
