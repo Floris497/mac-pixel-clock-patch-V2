@@ -128,6 +128,14 @@ function CoreDisplayPatch {
 		printf "Running 'sudo update_dyld_shared_cache' (Might need re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
 		sudo update_dyld_shared_cache
     	;;
+  5)  printf "Patching CoreDisplay with patch version 4\n"
+		sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
+		sudo touch /System/Library/Extensions
+		printf "Re-signing $CoreDisplayLocation\n"
+		sudo codesign -f -s - $CoreDisplayLocation
+		printf "Running 'sudo update_dyld_shared_cache' (Might need re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
+		sudo update_dyld_shared_cache
+		;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
       exit
       ;;
@@ -246,6 +254,7 @@ function options {
       v2) CoreDisplayPatch 2;;
 	  v3) CoreDisplayPatch 3;;
 	  v4) CoreDisplayPatch 4;;
+	  v5) CoreDisplayPatch 5;;
       *)  CoreDisplayPatch 0;;
     esac
     testCoreDisplayPatch 
