@@ -6,13 +6,13 @@ thiscommand=$0
 CoreDisplayLocation="/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay"
 
 # for development
-# CoreDisplayLocation="/Users/user/Desktop/CoreDisplay"
+# CoreDisplayLocation="/Users/<user>/Desktop/CoreDisplay"
 
 # Current CoreDisplay md5 Checksum
 CoreDisplayCurrent="$(md5 -q $CoreDisplayLocation)"
 
-# Current CoreDisplay md5 Checksum of the '(__DATA,__data)' section expoted by otool
-# This makes it possable to detect a patch regardless of the signing certificate
+# Current CoreDisplay md5 Checksum of the '(__DATA,__data)' section exported by otool
+# This makes it possible to detect a patch regardless of the signing certificate
 oToolCoreDisplayCurrent="$(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q)"
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from unpatched CoreDisplays
@@ -32,6 +32,7 @@ oToolCoreDisplayUnpatched=(
   5f51331dce01f1ced84643f6c996e324 '10.13.2 (17C88) and 10.13.3 (17D47)' 4
   6e04ad9d1f2bf43dc01ed92a0ba4b8ac '10.13.4 (17E199)' 4
   a273850d90c3cdf39f17ad63ed43203a '10.13.5 (17F77)' 4
+  714a9e14ccc64b0cf4bef2f083087d8e '10.14.2 (18C54)' 5
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -50,10 +51,11 @@ oToolCoreDisplayPatched=(
   a337a6a85264817d78a90122ebbc2723 '10.13.2 (17C88) and 10.13.3 (17D47)'
   11882f5e04a525da6701777c814c920a '10.13.4 (17E199)'
   b5dd02fe05903d7c39791afc642f9b2b '10.13.5 (17F77)'
+  2d71736504e14882b2eb5e994859ec09 '10.14.2 (18C54)'
 )
 
 function makeExit {
-  printf "Closing..\n"
+  printf "Closing...\n"
   exit
 }
 
@@ -66,11 +68,12 @@ function askExit {
 }
   
 function SIPInfo {
-  printf "more info: Google 'SIP'\n"
+  printf "Google for 'MacOS System Integrity Protection' to get more info on the subject.\n"
 }
 
 function help {
-  printf "using this script without input will patch CoreDisplay if supported version found\n"
+  printf "Using this script without input will patch CoreDisplay if a supported version can be found.\n"
+  printf "Supported arguments:\n"
   printf "patch [v1-v3]\t patch on a specific version\n"
   printf "\t\t eg. $(basename $thiscommand) patch v2\n"
   printf "unpatch\t\t undo patch\n"
@@ -83,8 +86,8 @@ function testSIP {
   if hash csrutil 2>/dev/null; then
     if [[ "$(csrutil status | head -n 1)" == *"status: enabled (Custom Configuration)"* ]]; then
       printf "SIP might or might not be disabled\n"
-      printf "the script might or might not be working\n"
-      printf "check \"\$ csrutil status\"\n"
+      printf "This script might or might not be working\n"
+      printf "Check \"\$ csrutil status\"\n"
       SIPInfo
       askExit
     elif [[ "$(csrutil status | head -n 1)" == *"status: enabled"* ]]; then
@@ -125,16 +128,15 @@ function CoreDisplayPatch {
    		sudo touch /System/Library/Extensions
     	printf "Re-signing $CoreDisplayLocation\n"
     	sudo codesign -f -s - $CoreDisplayLocation
-		printf "Running 'sudo update_dyld_shared_cache' (Might need re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
+		printf "Running 'sudo update_dyld_shared_cache' (Might need a re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
 		sudo update_dyld_shared_cache
     	;;
-  5)  printf "Patching CoreDisplay with patch version 4\n"
-		# inspired from: https://github.com/PMheart/CoreDisplayFixup/commit/c9c37a1040584e38cd3ccc53b1dac15df988ba11
-		sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
-		sudo touch /System/Library/Extensions
+  # Version 5 is an experimental patch for Mojave 10.14.1 and 10.14.2 from https://github.com/Floris497/mac-pixel-clock-patch-V2/issues/280.
+  5)  printf "Patching CoreDisplay with patch version 5\n"
+        sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
+        sudo touch /System/Library/Extensions
 		printf "Re-signing $CoreDisplayLocation\n"
 		sudo codesign -f -s - $CoreDisplayLocation
-		printf "Running 'sudo update_dyld_shared_cache' (Might need re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
 		sudo update_dyld_shared_cache
 		;;
   *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
@@ -150,7 +152,7 @@ function CoreDisplayUnpatch {
     printf "Moving backup file back in place\n"
     sudo mv $CoreDisplayLocation.bak $CoreDisplayLocation
   else 
-    printf "No backup found, the patch has either not been done, or the backup file has been deleted.."
+    printf "No backup found, the patch has either not been applied, or the backup file has been deleted."
   fi
 }
 
@@ -177,10 +179,10 @@ function testCoreDisplayPatch {
   if [[ ! -f "$CoreDisplayLocation.bak" ]]; then
     echo "Patch failed to run"
   elif [[ $(otool -t $CoreDisplayLocation.bak |tail -n +2 |md5 -q) !=  $(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q) ]]; then
-    echo "The code of CoreDisplay changed, the patch was probbably succesfull"
+    echo "The code of CoreDisplay changed, the patch was probably successful."
   else
-    echo "The code is still the same.. Patch did seem to run, but was probbably from the wrong version.."
-    echo "If you are running an new os run $thiscommand md5 and ask the maintainer of this script to add support for your system"
+    echo "The code is still the same. Patch seemed to run, but was probably for the wrong version."
+    echo "If you are running a new OS, run $thiscommand md5 and ask the maintainer of this script to add support for your system."
   fi
 
 }
@@ -231,7 +233,7 @@ function test {
     fi
   done
   if $nothingWasFound; then
-    echo "Unknown version of CoreDisplay found.."
+    echo "Unknown version of CoreDisplay found."
     CoreDisplayPrintAllMD5
   fi
 }
@@ -241,8 +243,8 @@ function options {
   if [[ $1 == "patch" ]]; then
     #test if there is a backup file
     if [[ -f "$CoreDisplayLocation.bak" ]]; then
-      printf "An backup file already exists, if you force this patch on an already patched version you will loose the original backup!\n"
-      printf "This will lead you to reinstall the OS if you loose a working version of CoreDisplay. be carefull\n"
+      printf "A backup file already exists - If you force this patch on an already patched version you will lose your original backup!\n"
+      printf "Be careful: Having no working version of CoreDisplay requires you to reinstall the OS.\n"
       printf "It might be wise to undo the patch before trying to redo it using: $thiscommand unpatch\n"
       askExit
     fi
@@ -262,7 +264,7 @@ function options {
     exit 
   elif [[ $1 == 'unpatch' ]] || [[ $1 == 'depatch' ]]; then
     if [[ ! -f "$CoreDisplayLocation.bak" ]]; then
-      printf "There is no backup file, we can not undo the patch. the patch might not even been done.\n"
+      printf "There is no backup file, we cannot undo the patch. The patch might have not even been applied.\n"
       makeExit
     fi
     CoreDisplayUnpatch
@@ -279,12 +281,12 @@ function options {
     test "patch"
     exit
   else
-    printf "option is not valid\n"
+    printf "Option is not valid\n"
     printf "\n"
 	  help
     exit
   fi
 }
 
-# runs the script
+# Run the script
 options $1 $2
