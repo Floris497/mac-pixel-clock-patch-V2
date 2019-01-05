@@ -2,11 +2,11 @@
 
 Based on [my fork of the repository](https://github.com/floris497/mac-pixel-clock-patch) and [the original project which is hosted on google code](https://code.google.com/p/mac-pixel-clock-patch/wiki/Documentation)
 
-## CoreDisplay 10.13.2 now supported by script (DID ONLY TEST FOR MYSELF YET) and Nvidia WEB drivers (Maxwell & Pascal) (GTX 1080, GTX 1070, GTX 1060)
+## CoreDisplay 10.14.2 now supported by the patch (EXPERIMENTAL, see [Issue 280](https://github.com/Floris497/mac-pixel-clock-patch-V2/issues/280)) and Nvidia WEB drivers (Maxwell & Pascal) (GTX 1080, GTX 1070, GTX 1060)
 
 ### Do not unpatch after updating!!! When updating the backup is not removed. unpatching will result in the old backup to be made active this means you will loose your current CoreDisplay driver and you won't have a backup.
 
-### For 10.12 and later please use the CoreDisplay patched insetad of IOKit. Pixel clock has been moved.
+### For 10.12 and later please use the CoreDisplay patched instead of IOKit. Pixel clock has been moved.
 
 If this patch helped you, and you are happy with the result you could consider making a little donation to my PayPal account on (email found here: http://minimind.nl/paypal.html)
 
