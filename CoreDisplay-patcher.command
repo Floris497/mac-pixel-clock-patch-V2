@@ -33,6 +33,7 @@ oToolCoreDisplayUnpatched=(
   6e04ad9d1f2bf43dc01ed92a0ba4b8ac '10.13.4 (17E199)' 4
   a273850d90c3cdf39f17ad63ed43203a '10.13.5 (17F77)' 4
   714a9e14ccc64b0cf4bef2f083087d8e '10.14.2 (18C54)' 5
+  176fcc0d47bcdfb463357c3864bf9bd1 '10.14.4 (18E226)' 5
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -52,6 +53,7 @@ oToolCoreDisplayPatched=(
   11882f5e04a525da6701777c814c920a '10.13.4 (17E199)'
   b5dd02fe05903d7c39791afc642f9b2b '10.13.5 (17F77)'
   2d71736504e14882b2eb5e994859ec09 '10.14.2 (18C54)'
+  176fcc0d47bcdfb463357c3864bf9bd1 '10.14.4 (18E226)'
 )
 
 function makeExit {
