@@ -13,7 +13,7 @@ CoreDisplayCurrent="$(md5 -q $CoreDisplayLocation)"
 
 # Current CoreDisplay md5 Checksum of the '(__DATA,__data)' section exported by otool
 # This makes it possible to detect a patch regardless of the signing certificate
-oToolCoreDisplayCurrent="$(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q)"
+oToolCoreDisplayCurrent="$(otool -t $CoreDisplayLocation | tail -n +2 | md5 -q)"
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from unpatched CoreDisplays
 # for future use of detecting a false patch, where the executible's checksum is changed by codesigning but not the actual code.
@@ -23,7 +23,7 @@ oToolCoreDisplayUnpatched=(
   f4c6e84ffa97e06624e5504edd87bf7d '10.12 16A284a' 1 # I don't know why these two are different
   4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
   d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
-  aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
+  aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1 # Sierra 10.12 release
   172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
   9c717568024daa81c364a839f09a1bfd '10.12.2 and 10.12.3' 3
   b7e8464b101f343012ba28cbd2db5ee8 '10.12.4 16E195' 3
@@ -33,8 +33,14 @@ oToolCoreDisplayUnpatched=(
   6e04ad9d1f2bf43dc01ed92a0ba4b8ac '10.13.4 (17E199)' 4
   a273850d90c3cdf39f17ad63ed43203a '10.13.5 (17F77)' 4
   714a9e14ccc64b0cf4bef2f083087d8e '10.14.2 (18C54)' 5
+  176fcc0d47bcdfb463357c3864bf9bd1 '10.14.4 (18E226)' 5
   814fe7a8695f6583d821b5665f6df71a '10.14.5 (18F132)' 5
   105051509e563ba96f190ed78a52feb9 '10.14.6 (18G84)' 5
+  105051509e563ba96f190ed78a52feb9 '10.14.6 (18G87)' 5
+  2168deeab49743b96a58954f8acacd81 '10.15 (19A583)' 5
+  0d64ad0502866f101d4abdafcec54f66 '10.15.1 (19B88)' 5
+  a4afd360d5a91e3d78d32d833350d288 '10.15.4 (19E287)' 5
+  3aa757600fbdfac0ce19d98f98d428b6 '10.15.7 (19H2)' 5
 )
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
@@ -44,7 +50,7 @@ oToolCoreDisplayPatched=(
   82f97933a3ae90d47054316fa8259f6c '10.12 16A284a'
   1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
   f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
-  eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
+  eb27b5d68e9fb15aa65ea0153637eae2 '10.12  ' # Sierra 10.12 release
   cf8373138af4671a561c1a4d6cdba771 '10.12.1'
   e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 and 10.12.3'
   ec01e0df5f71699c77bf2650a1c84f4f '10.12.4 16E195'
@@ -54,28 +60,34 @@ oToolCoreDisplayPatched=(
   11882f5e04a525da6701777c814c920a '10.13.4 (17E199)'
   b5dd02fe05903d7c39791afc642f9b2b '10.13.5 (17F77)'
   2d71736504e14882b2eb5e994859ec09 '10.14.2 (18C54)'
+  cb134eba367695eee1ba01c511121a41 '10.14.4 (18E226)'
   9581c3d50658882e79325bcf5f510245 '10.14.5 (18F132)'
   d4f2aca73c7915c639dbe9a7b9cf5ecd '10.14.6 (18G84)'
+  d4f2aca73c7915c639dbe9a7b9cf5ecd '10.14.6 (18G87)'
+  71d81e5c35d1791ccb35c3157524f797 '10.15 (19A583)'
+  0e2342a0798719765e3e12f8c34e7a5b '10.15.1 (19B88)'
+  fd95fbe3bea2f9083e0500798b7aa8a4 '10.15.4 (19E287)'
+  5120da03b4a07ad07a6fa7cb3ca1d21b '10.15.7 (19H2)'
 )
 
-function makeExit {
+function makeExit() {
   printf "Closing...\n"
   exit
 }
 
-function askExit {
+function askExit() {
   read -p "Do you want to continue? [Y/n] " -n 1 -r
-  echo 
+  echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     makeExit
   fi
 }
-  
-function SIPInfo {
+
+function SIPInfo() {
   printf "Google for 'MacOS System Integrity Protection' to get more info on the subject.\n"
 }
 
-function help {
+function help() {
   printf "Using this script without input will patch CoreDisplay if a supported version can be found.\n"
   printf "Supported arguments:\n"
   printf "patch [v1-v3]\t patch on a specific version\n"
@@ -86,7 +98,7 @@ function help {
   printf "help\t\t show this help message\n"
 }
 
-function testSIP {
+function testSIP() {
   if hash csrutil 2>/dev/null; then
     if [[ "$(csrutil status | head -n 1)" == *"status: enabled (Custom Configuration)"* ]]; then
       printf "SIP might or might not be disabled\n"
@@ -99,73 +111,79 @@ function testSIP {
       if [[ -z $1 ]]; then
         makeExit
       fi
-      
+
     elif [[ "$(csrutil status | head -n 1)" == *"status: disabled"* ]]; then
       printf "SIP looks to be disabled, all good!\n"
     fi
-  fi  
+  fi
 }
 
-function CoreDisplayPatch {
+function CoreDisplayPatch() {
   testSIP
   case "$1" in
-  1)  printf "Patching CoreDisplay with patch version 1\n"
-      	sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x0F\x1F\x00\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
-	  	sudo touch /System/Library/Extensions
-	  	printf "Re-signing $CoreDisplayLocation\n"
-	  	sudo codesign -f -s - $CoreDisplayLocation
-	  	;;
-  2)  printf "Patching CoreDisplay with patch version 2\n"
-		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x96\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x97\x04\x00\x00\x90/g' $CoreDisplayLocation
-	 	sudo touch /System/Library/Extensions
-	  	printf "Re-signing $CoreDisplayLocation\n"
-	  	sudo codesign -f -s - $CoreDisplayLocation
-	  	;;
-  3)  printf "Patching CoreDisplay with patch version 3\n"
-  		sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\xAD\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\xAE\x04\x00\x00\x90/g' $CoreDisplayLocation
-	  	sudo touch /System/Library/Extensions
-	  	printf "Re-signing $CoreDisplayLocation\n"
-	  	sudo codesign -f -s - $CoreDisplayLocation
-	  	;;
-  4)  printf "Patching CoreDisplay with patch version 4\n"
-  		sudo perl -i.bak -pe '$oldtest1 = qr"\xE8\x37\x02\x00\x00\xBB\xE6\x02\x00\xE0\x85\xC0\x0F\x85\x9C\x00\x00\x00"s;$newtest1 = "\xE8\x37\x02\x00\x00\xBB\xE6\x02\x00\xE0\x31\xC0\x0F\x85\x9C\x00\x00\x00"; $oldtest2 = qr"\xE8\x65\x00\x00\x00\x85\xC0\xBB\xE6\x02\x00\xE0\x0F\x85\xCA\xFE\xFF\xFF"s;$newtest2 = "\xE8\x65\x00\x00\x00\x31\xC0\xBB\xE6\x02\x00\xE0\x0F\x85\xCA\xFE\xFF\xFF";s/$oldtest1/$newtest1/g;s/$oldtest2/$newtest2/g' $CoreDisplayLocation
-   		sudo touch /System/Library/Extensions
-    	printf "Re-signing $CoreDisplayLocation\n"
-    	sudo codesign -f -s - $CoreDisplayLocation
-		printf "Running 'sudo update_dyld_shared_cache' (Might need a re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
-		sudo update_dyld_shared_cache
-    	;;
+  1)
+    printf "Patching CoreDisplay with patch version 1\n"
+    sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x05\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x0F\x1F\x00\xE9\x06\x04\x00\x00\x90/g' $CoreDisplayLocation
+    sudo touch /System/Library/Extensions
+    printf "Re-signing $CoreDisplayLocation\n"
+    sudo codesign -f -s - $CoreDisplayLocation
+    ;;
+  2)
+    printf "Patching CoreDisplay with patch version 2\n"
+    sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\x96\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\x97\x04\x00\x00\x90/g' $CoreDisplayLocation
+    sudo touch /System/Library/Extensions
+    printf "Re-signing $CoreDisplayLocation\n"
+    sudo codesign -f -s - $CoreDisplayLocation
+    ;;
+  3)
+    printf "Patching CoreDisplay with patch version 3\n"
+    sudo perl -i.bak -pe '$before = qr"\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85\xAD\x04\x00\x00"s;s/$before/\x31\xC0\x90\x90\x90\x90\x90\x90\xE9\xAE\x04\x00\x00\x90/g' $CoreDisplayLocation
+    sudo touch /System/Library/Extensions
+    printf "Re-signing $CoreDisplayLocation\n"
+    sudo codesign -f -s - $CoreDisplayLocation
+    ;;
+  4)
+    printf "Patching CoreDisplay with patch version 4\n"
+    sudo perl -i.bak -pe '$oldtest1 = qr"\xE8\x37\x02\x00\x00\xBB\xE6\x02\x00\xE0\x85\xC0\x0F\x85\x9C\x00\x00\x00"s;$newtest1 = "\xE8\x37\x02\x00\x00\xBB\xE6\x02\x00\xE0\x31\xC0\x0F\x85\x9C\x00\x00\x00"; $oldtest2 = qr"\xE8\x65\x00\x00\x00\x85\xC0\xBB\xE6\x02\x00\xE0\x0F\x85\xCA\xFE\xFF\xFF"s;$newtest2 = "\xE8\x65\x00\x00\x00\x31\xC0\xBB\xE6\x02\x00\xE0\x0F\x85\xCA\xFE\xFF\xFF";s/$oldtest1/$newtest1/g;s/$oldtest2/$newtest2/g' $CoreDisplayLocation
+    sudo touch /System/Library/Extensions
+    printf "Re-signing $CoreDisplayLocation\n"
+    sudo codesign -f -s - $CoreDisplayLocation
+    printf "Running 'sudo update_dyld_shared_cache' (Might need a re-run after reboot) - CAN TAKE A WHILE (Maybe even 10/30 minutes)"
+    sudo update_dyld_shared_cache
+    ;;
   # Version 5 is an experimental patch for Mojave 10.14.1 and 10.14.2 from https://github.com/Floris497/mac-pixel-clock-patch-V2/issues/280.
-  5)  printf "Patching CoreDisplay with patch version 5\n"
-        sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
-        sudo touch /System/Library/Extensions
-		printf "Re-signing $CoreDisplayLocation\n"
-		sudo codesign -f -s - $CoreDisplayLocation
-		sudo update_dyld_shared_cache
-		;;
-  *)  printf "This patch does not exist, make sure you used the right patch identfier\n"
-      exit
-      ;;
+  5)
+    printf "Patching CoreDisplay with patch version 5\n"
+    sudo perl -i.bak -pe '$before = qr"\xBB\x01\x00\x00\x00\xA8\x01\x0F\x85"s;s/$before/\x31\xDB\x90\x90\x90\x90\x90\x90\xE9/g' $CoreDisplayLocation
+    sudo touch /System/Library/Extensions
+    printf "Re-signing $CoreDisplayLocation\n"
+    sudo codesign -f -s - $CoreDisplayLocation
+    sudo update_dyld_shared_cache
+    ;;
+  *)
+    printf "This patch does not exist, make sure you used the right patch identfier\n"
+    exit
+    ;;
   esac
 }
 
-function CoreDisplayUnpatch {
+function CoreDisplayUnpatch() {
   testSIP
-  
+
   if [[ -f "$CoreDisplayLocation.bak" ]]; then
     printf "Moving backup file back in place\n"
     sudo mv $CoreDisplayLocation.bak $CoreDisplayLocation
-  else 
+  else
     printf "No backup found, the patch has either not been applied, or the backup file has been deleted."
   fi
 }
 
-function CoreDisplayPrintAllMD5 {
+function CoreDisplayPrintAllMD5() {
   echo "---- BEGINNING MD5 HASH SUMS ---- version: $(sw_vers -productVersion) build:$(sw_vers -buildVersion)"
   echo
-  printf "     otool CoreDisplay: $(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q)\n"
+  printf "     otool CoreDisplay: $(otool -t $CoreDisplayLocation | tail -n +2 | md5 -q)\n"
   if [[ -f "$CoreDisplayLocation.bak" ]]; then
-    printf " otool CoreDisplay.bak: $(otool -t $CoreDisplayLocation.bak |tail -n +2 |md5 -q)\n"
+    printf " otool CoreDisplay.bak: $(otool -t $CoreDisplayLocation.bak | tail -n +2 | md5 -q)\n"
   else
     printf " otool CoreDisplay.bak: NO FILE (this is okay)\n"
   fi
@@ -179,10 +197,10 @@ function CoreDisplayPrintAllMD5 {
   echo "---- ENDING MD5 HASH SUMS -------"
 }
 
-function testCoreDisplayPatch {
+function testCoreDisplayPatch() {
   if [[ ! -f "$CoreDisplayLocation.bak" ]]; then
     echo "Patch failed to run"
-  elif [[ $(otool -t $CoreDisplayLocation.bak |tail -n +2 |md5 -q) !=  $(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q) ]]; then
+  elif [[ $(otool -t $CoreDisplayLocation.bak | tail -n +2 | md5 -q) != $(otool -t $CoreDisplayLocation | tail -n +2 | md5 -q) ]]; then
     echo "The code of CoreDisplay changed, the patch was probably successful."
   else
     echo "The code is still the same. Patch seemed to run, but was probably for the wrong version."
@@ -191,48 +209,48 @@ function testCoreDisplayPatch {
 
 }
 
-function test {
+function test() {
   if [[ ! -z $1 && $1 == "status" ]]; then
-    testSIP "Don't Exit"  # Just checking patch status, can do it even if SIP is enabled
+    testSIP "Don't Exit" # Just checking patch status, can do it even if SIP is enabled
   else
     testSIP
   fi
-  
+
   printf "\n"
-  nothingWasFound=true;
-  for ((i=0; i < ${#CoreDisplayUnpatched[@]}; i+=3)); do
+  nothingWasFound=true
+  for ((i = 0; i < ${#CoreDisplayUnpatched[@]}; i += 3)); do
     if [[ $CoreDisplayCurrent == ${CoreDisplayUnpatched[$i]} ]]; then
-      printf "Detected unpatched CoreDisplay on OS X %s.\n" "${CoreDisplayUnpatched[$i+1]}"
+      printf "Detected unpatched CoreDisplay on OS X %s.\n" "${CoreDisplayUnpatched[$i + 1]}"
       nothingWasFound=false
       if [[ ! -z $1 ]]; then
         if [[ $1 == "patch" ]]; then
-          CoreDisplayPatch ${CoreDisplayUnpatched[$i+2]}
+          CoreDisplayPatch ${CoreDisplayUnpatched[$i + 2]}
           makeExit
         fi
       fi
     fi
   done
-  for ((i=0; i < ${#oToolCoreDisplayUnpatched[@]}; i+=3)); do
+  for ((i = 0; i < ${#oToolCoreDisplayUnpatched[@]}; i += 3)); do
     if [[ $oToolCoreDisplayCurrent == ${oToolCoreDisplayUnpatched[$i]} ]]; then
-      printf "(otool) Detected unpatched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayUnpatched[$i+1]}"
+      printf "(otool) Detected unpatched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayUnpatched[$i + 1]}"
       nothingWasFound=false
       if [[ ! -z $1 ]]; then
         if [[ $1 == "patch" ]]; then
-          CoreDisplayPatch ${oToolCoreDisplayUnpatched[$i+2]} 
+          CoreDisplayPatch ${oToolCoreDisplayUnpatched[$i + 2]}
           makeExit
         fi
       fi
     fi
   done
-  for ((i=0; i < ${#CoreDisplayPatched[@]}; i+=2)); do
+  for ((i = 0; i < ${#CoreDisplayPatched[@]}; i += 2)); do
     if [[ $CoreDisplayCurrent == ${CoreDisplayPatched[$i]} ]]; then
-      printf "Detected patched CoreDisplay on OS X %s.\n" "${CoreDisplayPatched[$i+1]}"
+      printf "Detected patched CoreDisplay on OS X %s.\n" "${CoreDisplayPatched[$i + 1]}"
       nothingWasFound=false
     fi
   done
-  for ((i=0; i < ${#oToolCoreDisplayPatched[@]}; i+=2)); do
+  for ((i = 0; i < ${#oToolCoreDisplayPatched[@]}; i += 2)); do
     if [[ $oToolCoreDisplayCurrent == ${oToolCoreDisplayPatched[$i]} ]]; then
-      printf "(otool) Detected patched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayPatched[$i+1]}"
+      printf "(otool) Detected patched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayPatched[$i + 1]}"
       nothingWasFound=false
     fi
   done
@@ -242,8 +260,7 @@ function test {
   fi
 }
 
-
-function options {
+function options() {
   if [[ $1 == "patch" ]]; then
     #test if there is a backup file
     if [[ -f "$CoreDisplayLocation.bak" ]]; then
@@ -257,15 +274,15 @@ function options {
       makeExit
     fi
     case "$2" in
-      v1) CoreDisplayPatch 1;;
-      v2) CoreDisplayPatch 2;;
-	  v3) CoreDisplayPatch 3;;
-	  v4) CoreDisplayPatch 4;;
-	  v5) CoreDisplayPatch 5;;
-      *)  CoreDisplayPatch 0;;
+    v1) CoreDisplayPatch 1 ;;
+    v2) CoreDisplayPatch 2 ;;
+    v3) CoreDisplayPatch 3 ;;
+    v4) CoreDisplayPatch 4 ;;
+    v5) CoreDisplayPatch 5 ;;
+    *) CoreDisplayPatch 0 ;;
     esac
-    testCoreDisplayPatch 
-    exit 
+    testCoreDisplayPatch
+    exit
   elif [[ $1 == 'unpatch' ]] || [[ $1 == 'depatch' ]]; then
     if [[ ! -f "$CoreDisplayLocation.bak" ]]; then
       printf "There is no backup file, we cannot undo the patch. The patch might have not even been applied.\n"
@@ -287,7 +304,7 @@ function options {
   else
     printf "Option is not valid\n"
     printf "\n"
-	  help
+    help
     exit
   fi
 }
