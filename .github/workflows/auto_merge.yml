@@ -7,7 +7,9 @@ jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Merge origin development
+      - name: Checkout
+        uses: actions/checkout@development
+      - name: Merge origin development to wh_dev
         run: |
           git config --global user.name 'SturdyCat'
           git config --global user.email '43430109@qq.com'
