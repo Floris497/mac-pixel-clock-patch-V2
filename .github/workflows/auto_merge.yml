@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@main
       - name: Merge origin development to wh_dev
         run: |
-          git config --global user.name 'SturdyCat'
-          git config --global user.email '43430109@qq.com'
+          git config --global user.name '${{ secrets.GIT_USER_NAME }}'
+          git config --global user.email '${{ secrets.GIT_USER_EMAIL }}'
           git checkout development
           git push origin development:wh_dev -f
