@@ -1,0 +1,15 @@
+name: wh_dev merge development  
+on:
+  push:
+    branches:
+      - development
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Merge origin development
+        run: |
+          git config --global user.name 'SturdyCat'
+          git config --global user.email '43430109@qq.com'
+          git push origin development:wh_dev -f
